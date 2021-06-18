@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Functional.NetCDF", "Functional.NetCDF\Functional.NetCDF.fsproj", "{BD542F07-1F16-4B21-9DA7-7224089C6FDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD542F07-1F16-4B21-9DA7-7224089C6FDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD542F07-1F16-4B21-9DA7-7224089C6FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD542F07-1F16-4B21-9DA7-7224089C6FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD542F07-1F16-4B21-9DA7-7224089C6FDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7DE324A9-7901-46BB-A16B-EB8CA4A2D112}
+	EndGlobalSection
+EndGlobal
