@@ -20,3 +20,16 @@ type NetCDF_Test () =
 
         resultClose |> should equal noError
 
+    [<Test>]
+    member this.``nc_inq_nvars should retrieve the correct number of variables`` () =
+        let mutable id : int = -1
+        nc_open("./test-data/map.nc", 0, &id) |> ignore
+
+        let mutable nVars : int = -1
+        let result = nc_inq_nvars(id, &nVars)
+
+        result |> should equal noError
+        nVars |> should equal 34
+
+        nc_close(id) |> ignore
+

@@ -18,4 +18,6 @@ module internal NetCDF =
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
     extern ReturnCode nc_close([<In>] int ncidp)
 
-
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern ReturnCode nc_inq_nvars([<In>] int ncid, 
+                                   [<Out>] int& nvarsp)
