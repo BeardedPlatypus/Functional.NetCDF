@@ -5,7 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Library.fs" />
+    <InternalsVisibleToSuffix Include=".Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="NetCDF.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Lib\" />
   </ItemGroup>
 
 </Project>
