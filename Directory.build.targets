@@ -1,0 +1,31 @@
+<!--
+This file ensures that the internals are made visible to the corresponding test projects:
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="CustomTest1" />                 | Corresponds with: [assembly: InternalsVisibleTo("CustomTest1")]
+    <InternalsVisibleTo Include="CustomTest2, PublicKey=abc" />  | Corresponds with: [assembly: InternalsVisibleTo("CustomTest2, PublicKey=abc")]
+    <InternalsVisibleTo Include="$(AssemblyName).Custom" />      | Corresponds with: [assembly: InternalsVisibleTo("ClassLibrary1.Custom")]
+
+    <InternalsVisibleToSuffix Include=".Tests" />                | Corresponds with: [assembly: InternalsVisibleTo("ClassLibrary1.Tests")]
+    <InternalsVisibleToSuffix Include=".FunctionalTests" />      | Corresponds with: [assembly: InternalsVisibleTo("ClassLibrary1.FunctionalTests")] 
+  </ItemGroup>
+
+See https://www.meziantou.net/declaring-internalsvisibleto-in-the-csproj.htm for additional information.
+-->
+<Project>
+  <Target Name="AddInternalsVisibleTo" BeforeTargets="BeforeCompile">
+    <!-- Handle InternalsVisibleTo -->
+    <ItemGroup Condition="'@(InternalsVisibleTo->Count())' &gt; 0">
+      <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <_Parameter1>%(InternalsVisibleTo.Identity)</_Parameter1>
+      </AssemblyAttribute>
+    </ItemGroup>
+
+    <!-- Handle InternalsVisibleToSuffix -->
+    <ItemGroup Condition="@(InternalsVisibleToSuffix->Count()) &gt; 0">
+      <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <_Parameter1>$(AssemblyName)%(InternalsVisibleToSuffix.Identity)</_Parameter1>
+      </AssemblyAttribute>
+    </ItemGroup>
+  </Target>
+</Project>
