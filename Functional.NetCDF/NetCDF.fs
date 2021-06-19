@@ -11,6 +11,24 @@ module internal NetCDF =
     type ReturnCode = int
 
     /// <summary>
+    /// <see cref="NCType"/> defines the possible data types.
+    /// </summary>
+    [<RequireQualifiedAccess>]
+    type NCType = 
+       | Byte = 1
+       | Char = 2
+       | Short = 3
+       | Int = 4
+       | Float  = 5
+       | Double = 6
+       | UByte = 7
+       | UShort = 8
+       | UInt = 9
+       | Int64 = 10
+       | UInt64 = 11
+       | String = 12
+
+    /// <summary>
     /// Open an existing netCDF file.
     /// </summary>
     /// <param name="path">File name for the netCDF dataset to be opened</param>
@@ -152,5 +170,5 @@ module internal NetCDF =
     extern ReturnCode nc_inq_att([<In>] int ncid,
                                  [<In>] int varid,
                                  [<In>] string name,
-                                 [<Out>] int& xtypep,
+                                 [<Out>] NCType& xtypep,
                                  [<Out>] int& lenp)
