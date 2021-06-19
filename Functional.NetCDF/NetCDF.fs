@@ -98,3 +98,32 @@ module internal NetCDF =
     extern ReturnCode nc_inq_varnatts([<In>] int ncid,
                                       [<In>] int varid,
                                       [<Out>] int& nattsp)
+
+    /// <summary>
+    /// Retrieve the name of the attribute at <paramref name="attnum"/>.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="attnum">Attribute number</param>
+    /// <returns>
+    /// - NC_NOERR: no error.
+    /// - NC_EBADID: bad ncid.
+    /// - NC_ENOTVAR bad varid.
+    /// - NC_EBADGRPID: bad group ID.
+    /// - NC_EBADNAME: bad name.
+    /// - NC_ENOTATT: attribute not found.
+    /// - NC_ECHAR: illegal conversion to or from NC_CHAR.
+    /// - NC_ENOMEM: out of memory.
+    /// - NC_ERANGE: range error when converting data.
+    /// </returns>
+    /// <remarks>
+    /// The attributes for each variable are numbered from 0 (the first 
+    /// attribute) to natts-1, where natts is the number of attributes
+    /// for the variable, as returned from a call to nc_inq_varnatts.
+    /// </remarks>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern ReturnCode nc_inq_attname([<In>] int ncid, 
+                                     [<In>] int varid,
+                                     [<In>] int attnum,
+                                     [<Out>] StringBuilder name)
+    

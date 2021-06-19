@@ -59,3 +59,15 @@ type NetCDF_Test () =
 
         nc_close(id) |> ignore
 
+    [<Test>]
+    member this.``nc_inq_attname should retrieve the correct attribute name`` () =
+        let mutable id : int = -1
+        nc_open("./test-data/map.nc", 0, &id) |> ignore
+        
+        let resultString : System.Text.StringBuilder = System.Text.StringBuilder("", 256)
+
+        let result = nc_inq_attname(id, 0, 0, resultString)
+        result |> should equal noError
+        resultString.ToString() |> should equal "name"
+
+        nc_close(id) |> ignore
