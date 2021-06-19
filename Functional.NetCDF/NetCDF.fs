@@ -15,18 +15,29 @@ module internal NetCDF =
     /// </summary>
     [<RequireQualifiedAccess>]
     type NCType = 
-       | Byte = 1
-       | Char = 2
-       | Short = 3
-       | Int = 4
-       | Float  = 5
-       | Double = 6
-       | UByte = 7
-       | UShort = 8
-       | UInt = 9
-       | Int64 = 10
-       | UInt64 = 11
-       | String = 12
+        | Byte = 1
+        | Char = 2
+        | Short = 3
+        | Int = 4
+        | Float  = 5
+        | Double = 6
+        | UByte = 7
+        | UShort = 8
+        | UInt = 9
+        | Int64 = 10
+        | UInt64 = 11
+        | String = 12
+
+    /// <summary>
+    /// <see cref="NCOpenMode"/> defines the read and write modes of the NetCDf
+    /// files.
+    /// </summary>
+    [<System.Flags>]
+    [<RequireQualifiedAccess>]
+    type NCOpenMode =
+        | NoWrite = 0x0000
+        | Write   = 0x0001
+        | Share   = 0x0800
 
     /// <summary>
     /// Open an existing netCDF file.
@@ -45,7 +56,7 @@ module internal NetCDF =
     /// </returns>
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
     extern ReturnCode nc_open([<In>] string path, 
-                              [<In>] int omode,
+                              [<In>] NCOpenMode omode,
                               [<Out>] int& ncidp)
 
     /// <summary>

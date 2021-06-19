@@ -12,7 +12,7 @@ type NetCDF_Test () =
     [<Test>]
     member this.``Opening and closing a NetCDF files should not return errors.`` () =
         let mutable id : int = -1
-        let resultOpen = nc_open("./test-data/map.nc", 0, &id)
+        let resultOpen = nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id)
 
         resultOpen |> should equal noError
 
@@ -23,7 +23,7 @@ type NetCDF_Test () =
     [<Test>]
     member this.``nc_inq_nvars should retrieve the correct number of variables`` () =
         let mutable id : int = -1
-        nc_open("./test-data/map.nc", 0, &id) |> ignore
+        nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id) |> ignore
 
         let mutable nVars : int = -1
         let result = nc_inq_nvars(id, &nVars)
@@ -36,7 +36,7 @@ type NetCDF_Test () =
     [<Test>]
     member this.``nc_inq_varname should retrieve the correct name of variables`` () = 
         let mutable id : int = -1
-        nc_open("./test-data/map.nc", 0, &id) |> ignore
+        nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id) |> ignore
         
         let resultString : System.Text.StringBuilder = System.Text.StringBuilder("", 256)
 
@@ -49,7 +49,7 @@ type NetCDF_Test () =
     [<Test>]
     member this.``nc_inq_varnatts should retrieve the correct number of attributes`` () =
         let mutable id : int = -1
-        nc_open("./test-data/map.nc", 0, &id) |> ignore
+        nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id) |> ignore
         
         let mutable nAttributes : int = -1
 
@@ -62,7 +62,7 @@ type NetCDF_Test () =
     [<Test>]
     member this.``nc_inq_attname should retrieve the correct attribute name`` () =
         let mutable id : int = -1
-        nc_open("./test-data/map.nc", 0, &id) |> ignore
+        nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id) |> ignore
         
         let resultString : System.Text.StringBuilder = System.Text.StringBuilder("", 256)
 
@@ -76,7 +76,7 @@ type NetCDF_Test () =
     [<Test>]
     member this.``nc_inq_att should retrieve the correct attribute type and length`` () =
         let mutable id : int = -1
-        nc_open("./test-data/map.nc", 0, &id) |> ignore
+        nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id) |> ignore
         
         let mutable t: NCType = NCType.Byte
         let mutable l: int = -1
