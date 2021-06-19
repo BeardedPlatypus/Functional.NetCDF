@@ -71,3 +71,20 @@ type NetCDF_Test () =
         resultString.ToString() |> should equal "name"
 
         nc_close(id) |> ignore
+
+
+    [<Test>]
+    member this.``nc_inq_att should retrieve the correct attribute type and length`` () =
+        let mutable id : int = -1
+        nc_open("./test-data/map.nc", 0, &id) |> ignore
+        
+        let mutable t: int = -1
+        let mutable l: int = -1
+
+        let result = nc_inq_att(id, 0, "name", &t, &l)
+        result |> should equal noError
+        
+        t |> should equal 2
+        l |> should equal 17
+
+        nc_close(id) |> ignore

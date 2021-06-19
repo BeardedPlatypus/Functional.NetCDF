@@ -105,6 +105,7 @@ module internal NetCDF =
     /// <param name="ncid">File and group ID</param>
     /// <param name="varid">Variable ID</param>
     /// <param name="attnum">Attribute number</param>
+    /// <param name="name">Pointer to the location for the returned attribute name.</param>
     /// <returns>
     /// - NC_NOERR: no error.
     /// - NC_EBADID: bad ncid.
@@ -127,3 +128,29 @@ module internal NetCDF =
                                      [<In>] int attnum,
                                      [<Out>] StringBuilder name)
     
+    /// <summary>
+    /// Retrieve the information about the attribute specified with 
+    /// <paramref name="name"/>.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="name">Attribute name.</param>
+    /// <param name="xtypep">Pointer to the location for the returned attribute type.</param>
+    /// <param name="lenp">Pointer to the location for the returned number of values currently stored in the attribute.</param>
+    /// <returns>
+    /// - NC_NOERR: no error.
+    /// - NC_EBADID: bad ncid.
+    /// - NC_ENOTVAR: bad varid.
+    /// - NC_EBADGRPID: bad group ID.
+    /// - NC_EBADNAME: bad name.
+    /// - NC_ENOTATT: attribute not found.
+    /// - NC_ECHAR: illegal conversion to or from NC_CHAR.
+    /// - NC_ENOMEM: out of memory.
+    /// - NC_ERANGE: range error when converting data.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern ReturnCode nc_inq_att([<In>] int ncid,
+                                 [<In>] int varid,
+                                 [<In>] string name,
+                                 [<Out>] int& xtypep,
+                                 [<Out>] int& lenp)
