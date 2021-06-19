@@ -34,7 +34,7 @@ type NetCDF_Test () =
         nc_close(id) |> ignore
 
     [<Test>]
-    member this.``nc_in_varname should retrieve the correct name of variables`` () = 
+    member this.``nc_inq_varname should retrieve the correct name of variables`` () = 
         let mutable id : int = -1
         nc_open("./test-data/map.nc", 0, &id) |> ignore
         
@@ -45,5 +45,17 @@ type NetCDF_Test () =
         resultString.ToString() |> should equal "projected_coordinate_system"
 
         nc_close(id) |> ignore
+
+    [<Test>]
+    member this.``nc_inq_varnatts should retrieve the correct number of attributes`` () =
+        let mutable id : int = -1
+        nc_open("./test-data/map.nc", 0, &id) |> ignore
         
+        let mutable nAttributes : int = -1
+
+        let result = nc_inq_varnatts(id, 0, &nAttributes)
+        result |> should equal noError
+        nAttributes |> should equal 11
+
+        nc_close(id) |> ignore
 

@@ -82,3 +82,19 @@ module internal NetCDF =
     extern ReturnCode nc_inq_varname([<In>] int ncid, 
                                      [<In>] int varid,
                                      [<Out>] StringBuilder name)
+
+    /// <summary>
+    /// Retrieve the number of attributes associated with a variable.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="nattsp">Pointer where number of attributes will be stored. Ignored if null</param>
+    /// <returns>
+    /// - NC_NOERR:   No error.
+    /// - NC_EBADID:  Bad ncid.
+    /// - NC_ENOTVAR: Invalid variable ID.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern ReturnCode nc_inq_varnatts([<In>] int ncid,
+                                      [<In>] int varid,
+                                      [<Out>] int& nattsp)
