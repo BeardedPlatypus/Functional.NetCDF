@@ -8,8 +8,6 @@ open System.Runtime.InteropServices
 /// NetCDF dll.
 /// </summary>
 module internal NetCDF =
-    type ReturnCode = int
-
     /// <summary>
     /// <see cref="NCType"/> defines the possible data types.
     /// </summary>
@@ -40,6 +38,106 @@ module internal NetCDF =
         | Share   = 0x0800
 
     /// <summary>
+    /// <see cref="NCReturnCode"/> describes the possible return codes by the 
+    /// native NetCDF code.
+    /// </summary>
+    type NCReturnCode = 
+        | NC_NOERR          =  0          
+        | NC2_ERR           = -1
+        | NC_EBADID         = -33
+        | NC_ENFILE         = -34      
+        | NC_EEXIST         = -35      
+        | NC_EINVAL         = -36      
+        | NC_EPERM          = -37      
+        | NC_ENOTINDEFINE   = -38
+        | NC_EINDEFINE      = -39
+        | NC_EINVALCOORDS   = -40
+        | NC_EMAXDIMS       = -41 
+        | NC_ENAMEINUSE     = -42      
+        | NC_ENOTATT        = -43      
+        | NC_EMAXATTS       = -44      
+        | NC_EBADTYPE       = -45      
+        | NC_EBADDIM        = -46      
+        | NC_EUNLIMPOS      = -47      
+        | NC_EMAXVARS       = -48 
+        | NC_ENOTVAR        = -49
+        | NC_EGLOBAL        = -50      
+        | NC_ENOTNC         = -51      
+        | NC_ESTS           = -52      
+        | NC_EMAXNAME       = -53      
+        | NC_EUNLIMIT       = -54      
+        | NC_ENORECVARS     = -55      
+        | NC_ECHAR          = -56      
+        | NC_EEDGE          = -57      
+        | NC_ESTRIDE        = -58      
+        | NC_EBADNAME       = -59      
+        | NC_ERANGE         = -60
+        | NC_ENOMEM         = -61      
+        | NC_EVARSIZE       = -62      
+        | NC_EDIMSIZE       = -63      
+        | NC_ETRUNC         = -64      
+        | NC_EAXISTYPE      = -65      
+        | NC_EDAP           = -66      
+        | NC_ECURL          = -67      
+        | NC_EIO            = -68      
+        | NC_ENODATA        = -69      
+        | NC_EDAPSVC        = -70      
+        | NC_EDAS           = -71      
+        | NC_EDDS           = -72      
+        | NC_EDATADDS       = -73      
+        | NC_EDAPURL        = -74      
+        | NC_EDAPCONSTRAINT = -75    
+        | NC_ETRANSLATION   = -76      
+        | NC_EACCESS        = -77      
+        | NC_EAUTH          = -78      
+        | NC_ENOTFOUND      = -90      
+        | NC_ECANTREMOVE    = -91      
+        | NC_EINTERNAL      = -92      
+        | NC_EPNETCDF       = -93      
+        | NC4_FIRST_ERROR   = -100    
+        | NC_EHDFERR        = -101    
+        | NC_ECANTREAD      = -102    
+        | NC_ECANTWRITE     = -103    
+        | NC_ECANTCREATE    = -104    
+        | NC_EFILEMETA      = -105    
+        | NC_EDIMMETA       = -106    
+        | NC_EATTMETA       = -107    
+        | NC_EVARMETA       = -108    
+        | NC_ENOCOMPOUND    = -109    
+        | NC_EATTEXISTS     = -110    
+        | NC_ENOTNC4        = -111    
+        | NC_ESTRICTNC3     = -112    
+        | NC_ENOTNC3        = -113    
+        | NC_ENOPAR         = -114    
+        | NC_EPARINIT       = -115    
+        | NC_EBADGRPID      = -116    
+        | NC_EBADTYPID      = -117    
+        | NC_ETYPDEFINED    = -118    
+        | NC_EBADFIELD      = -119    
+        | NC_EBADCLASS      = -120    
+        | NC_EMAPTYPE       = -121    
+        | NC_ELATEFILL      = -122    
+        | NC_ELATEDEF       = -123    
+        | NC_EDIMSCALE      = -124    
+        | NC_ENOGRP         = -125    
+        | NC_ESTORAGE       = -126    
+        | NC_EBADCHUNK      = -127    
+        | NC_ENOTBUILT      = -128    
+        | NC_EDISKLESS      = -129    
+        | NC_ECANTEXTEND    = -130    
+        | NC_EMPI           = -131    
+        | NC_EFILTER        = -132    
+        | NC_ERCFILE        = -133    
+        | NC_ENULLPAD       = -134    
+        | NC_EINMEMORY      = -135    
+        | NC_ENOFILTER      = -136    
+        | NC_ENCZARR        = -137    
+        | NC_ES3            = -138    
+        | NC_EEMPTY         = -139    
+        | NC_EFOUND         = -140    
+        | NC4_LAST_ERROR    = -140    
+
+    /// <summary>
     /// Open an existing netCDF file.
     /// </summary>
     /// <param name="path">File name for the netCDF dataset to be opened</param>
@@ -55,9 +153,9 @@ module internal NetCDF =
     /// - NC_EDIMMETA: Error in netCDF-4 dimension metadata. (NetCDF-4 files only.)
     /// </returns>
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
-    extern ReturnCode nc_open([<In>] string path, 
-                              [<In>] NCOpenMode omode,
-                              [<Out>] int& ncidp)
+    extern NCReturnCode nc_open([<In>] string path, 
+                                [<In>] NCOpenMode omode,
+                                [<Out>] int& ncidp)
 
     /// <summary>
     /// Close an open netCDF dataset.
@@ -77,7 +175,7 @@ module internal NetCDF =
     /// dataset that is opened or created.
     /// <remarks>
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
-    extern ReturnCode nc_close([<In>] int ncid)
+    extern NCReturnCode nc_close([<In>] int ncid)
 
     /// <summary>
     /// Retrieve the number of variables in a file or group.
@@ -89,8 +187,8 @@ module internal NetCDF =
     /// - NC_EBADID: Bad ncid
     /// </returns>
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
-    extern ReturnCode nc_inq_nvars([<In>] int ncid, 
-                                   [<Out>] int& nvarsp)
+    extern NCReturnCode nc_inq_nvars([<In>] int ncid, 
+                                     [<Out>] int& nvarsp)
 
     /// <summary>
     /// Retrieve the name of the specified <paramref name="varid"/>.
@@ -108,9 +206,9 @@ module internal NetCDF =
     /// length is NC_MAX_NAME. The name is ignored if NULL.
     /// </remarks>
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
-    extern ReturnCode nc_inq_varname([<In>] int ncid, 
-                                     [<In>] int varid,
-                                     [<Out>] StringBuilder name)
+    extern NCReturnCode nc_inq_varname([<In>] int ncid, 
+                                       [<In>] int varid,
+                                       [<Out>] StringBuilder name)
 
     /// <summary>
     /// Retrieve the number of attributes associated with a variable.
@@ -124,9 +222,9 @@ module internal NetCDF =
     /// - NC_ENOTVAR: Invalid variable ID.
     /// </returns>
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
-    extern ReturnCode nc_inq_varnatts([<In>] int ncid,
-                                      [<In>] int varid,
-                                      [<Out>] int& nattsp)
+    extern NCReturnCode nc_inq_varnatts([<In>] int ncid,
+                                        [<In>] int varid,
+                                        [<Out>] int& nattsp)
 
     /// <summary>
     /// Retrieve the name of the attribute at <paramref name="attnum"/>.
@@ -152,10 +250,10 @@ module internal NetCDF =
     /// for the variable, as returned from a call to nc_inq_varnatts.
     /// </remarks>
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
-    extern ReturnCode nc_inq_attname([<In>] int ncid, 
-                                     [<In>] int varid,
-                                     [<In>] int attnum,
-                                     [<Out>] StringBuilder name)
+    extern NCReturnCode nc_inq_attname([<In>] int ncid, 
+                                       [<In>] int varid,
+                                       [<In>] int attnum,
+                                       [<Out>] StringBuilder name)
     
     /// <summary>
     /// Retrieve the information about the attribute specified with 
@@ -178,8 +276,8 @@ module internal NetCDF =
     /// - NC_ERANGE: range error when converting data.
     /// </returns>
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
-    extern ReturnCode nc_inq_att([<In>] int ncid,
-                                 [<In>] int varid,
-                                 [<In>] string name,
-                                 [<Out>] NCType& xtypep,
-                                 [<Out>] int& lenp)
+    extern NCReturnCode nc_inq_att([<In>] int ncid,
+                                   [<In>] int varid,
+                                   [<In>] string name,
+                                   [<Out>] NCType& xtypep,
+                                   [<Out>] int& lenp)

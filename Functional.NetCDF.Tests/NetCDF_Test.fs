@@ -7,7 +7,7 @@ open BeardedPlatypus.Functional.NetCDF.NetCDF
 
 [<TestFixture>]
 type NetCDF_Test () =
-    let noError : ReturnCode = 0
+    let noError : NCReturnCode = NCReturnCode.NC_NOERR
 
     [<Test>]
     member this.``Opening and closing a NetCDF files should not return errors.`` () =
