@@ -1,5 +1,6 @@
 ﻿namespace BeardedPlatypus.Functional.NetCDF
 
+open System.Text
 open System.Runtime.InteropServices
 
 /// <summary>
@@ -61,3 +62,23 @@ module internal NetCDF =
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
     extern ReturnCode nc_inq_nvars([<In>] int ncid, 
                                    [<Out>] int& nvarsp)
+
+    /// <summary>
+    /// Retrieve the name of the specified <paramref name="varid"/>.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="name">Returned variable name</param>
+    /// <returns>
+    /// - NC_NOERR:   No error.
+    /// - NC_EBADID:  Bad ncid.
+    /// - NC_ENOTVAR: Invalid variable ID.
+    /// </returns>
+    /// <remarks>
+    /// The caller must allocate the space for the returned name. The maximum 
+    /// length is NC_MAX_NAME. The name is ignored if NULL.
+    /// </remarks>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern ReturnCode nc_inq_varname([<In>] int ncid, 
+                                     [<In>] int varid,
+                                     [<Out>] StringBuilder name)
