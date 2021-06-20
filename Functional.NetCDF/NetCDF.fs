@@ -173,7 +173,7 @@ module internal NetCDF =
     /// state before define mode was last entered.) After an open netCDF 
     /// dataset is closed, its netCDF ID may be reassigned to the next netCDF
     /// dataset that is opened or created.
-    /// <remarks>
+    /// </remarks>
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
     extern NCReturnCode nc_close([<In>] int ncid)
 
