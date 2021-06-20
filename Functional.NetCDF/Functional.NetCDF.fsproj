@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -13,7 +13,7 @@
     <Compile Include="Managed\Common.fs" />
     <Compile Include="Managed\IFile.fs" />
     <Compile Include="Managed\File.fs" />
-    <Compile Include="NetCDFApi.fs" />
+    <Compile Include="Managed\NetCDF.fs" />
   </ItemGroup>
 
   <ItemGroup>
