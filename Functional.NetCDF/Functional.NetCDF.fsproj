@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Compile Include="Native\NetCDF.fs" />
+    <Compile Include="NetCDFApi.fs" />
   </ItemGroup>
 
   <ItemGroup>
