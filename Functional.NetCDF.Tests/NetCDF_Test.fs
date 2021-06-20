@@ -135,3 +135,27 @@ type NetCDF_Test () =
         resultArray |> should equal [| 0s |]
 
         nc_close(id) |> ignore
+
+
+    [<Test>]
+    [<TestCase("longitude_of_prime_meridian", 0.0)>]
+    [<TestCase("semi_major_axis", 6378137.0)>]
+    [<TestCase("semi_minor_axis", 6356752.314245)>]
+    [<TestCase("inverse_flattening", 298.257223563)>]
+    member this.``nc_get_att_double should retrieve the correct double array`` ((attributeName: string), (expectedResult: double)) =
+        let mutable id : int = -1
+        nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id) |> ignore
+        
+        let mutable t: NCType = NCType.Byte
+        let mutable l: int = -1
+
+        let varId = 0
+        nc_inq_att(id, varId, attributeName, &t, &l) |> ignore
+         
+        let resultArray = Array.create l (System.Double.NaN)
+        let result = nc_get_att_double(id, varId, attributeName, resultArray)
+
+        result |> should equal noError
+        resultArray |> should equal [| expectedResult |]
+
+        nc_close(id) |> ignore
