@@ -9,6 +9,11 @@ open System.Runtime.InteropServices
 /// </summary>
 module internal NetCDF =
     /// <summary>
+    /// The maximum number of characters of a name within NetCDF
+    /// </summary>
+    let NC_MAX_NAME: int = 256
+
+    /// <summary>
     /// <see cref="NCType"/> defines the possible data types.
     /// </summary>
     [<RequireQualifiedAccess>]
