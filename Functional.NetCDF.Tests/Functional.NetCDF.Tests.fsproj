@@ -16,15 +16,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="test-data\map.nc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Compile Include="Native\NetCDF_Test.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="test-data\map.nc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+  <ItemGroup />
 
   <ItemGroup>
     <ProjectReference Include="..\Functional.NetCDF\Functional.NetCDF.fsproj" />
