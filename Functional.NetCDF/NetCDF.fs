@@ -1,6 +1,5 @@
 ﻿namespace BeardedPlatypus.Functional.NetCDF
 
-open System
 open System.Text
 open System.Runtime.InteropServices
 
