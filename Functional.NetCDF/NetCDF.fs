@@ -13,16 +13,16 @@ module internal NetCDF =
     /// </summary>
     [<RequireQualifiedAccess>]
     type NCType = 
-        | Byte = 1
-        | Char = 2
-        | Short = 3
-        | Int = 4
+        | Byte   = 1
+        | Char   = 2
+        | Short  = 3
+        | Int    = 4
         | Float  = 5
         | Double = 6
-        | UByte = 7
+        | UByte  = 7
         | UShort = 8
-        | UInt = 9
-        | Int64 = 10
+        | UInt   = 9
+        | Int64  = 10
         | UInt64 = 11
         | String = 12
 
