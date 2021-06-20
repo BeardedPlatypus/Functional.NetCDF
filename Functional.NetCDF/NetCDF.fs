@@ -1,5 +1,6 @@
 ﻿namespace BeardedPlatypus.Functional.NetCDF
 
+open System
 open System.Text
 open System.Runtime.InteropServices
 
@@ -281,3 +282,243 @@ module internal NetCDF =
                                    [<In>] string name,
                                    [<Out>] NCType& xtypep,
                                    [<Out>] int& lenp)
+
+    /// <summary>
+    /// Get an attribute array of type double.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="name">Attribute name.</param>
+    /// <param name="value">Pointer that will get array of attribute values.</param>
+    /// <returns>
+    /// - NC_NOERR: for success.
+    /// - NC_EBADID: Bad ncid.
+    ///  -NC_ENOTVAR: Bad varid.
+    ///  -NC_EBADNAME: Bad name. See NetCDF Names.
+    ///  -NC_EINVAL: Invalid parameters.
+    ///  -NC_ENOTATT: Can't find attribute.
+    ///  -NC_ECHAR: Can't convert to or from NC_CHAR.
+    ///  -NC_ENOMEM: Out of memory.
+    ///  -NC_ERANGE: Data conversion went out of range.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_get_att_double([<In>] int ncid,
+                                          [<In>] int varid,
+                                          [<In>] string name,
+                                          [<Out>] double[] value)
+
+    /// <summary>
+    /// Get an attribute array of type float.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="name">Attribute name.</param>
+    /// <param name="value">Pointer that will get array of attribute values.</param>
+    /// <returns>
+    /// - NC_NOERR: for success.
+    /// - NC_EBADID: Bad ncid.
+    ///  -NC_ENOTVAR: Bad varid.
+    ///  -NC_EBADNAME: Bad name. See NetCDF Names.
+    ///  -NC_EINVAL: Invalid parameters.
+    ///  -NC_ENOTATT: Can't find attribute.
+    ///  -NC_ECHAR: Can't convert to or from NC_CHAR.
+    ///  -NC_ENOMEM: Out of memory.
+    ///  -NC_ERANGE: Data conversion went out of range.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_get_att_float([<In>] int ncid,
+                                         [<In>] int varid,
+                                         [<In>] string name,
+                                         [<Out>] float32[] value)
+
+    /// <summary>
+    /// Get an attribute array of type int.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="name">Attribute name.</param>
+    /// <param name="value">Pointer that will get array of attribute values.</param>
+    /// <returns>
+    /// - NC_NOERR: for success.
+    /// - NC_EBADID: Bad ncid.
+    ///  -NC_ENOTVAR: Bad varid.
+    ///  -NC_EBADNAME: Bad name. See NetCDF Names.
+    ///  -NC_EINVAL: Invalid parameters.
+    ///  -NC_ENOTATT: Can't find attribute.
+    ///  -NC_ECHAR: Can't convert to or from NC_CHAR.
+    ///  -NC_ENOMEM: Out of memory.
+    ///  -NC_ERANGE: Data conversion went out of range.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_get_att_int([<In>] int ncid,
+                                       [<In>] int varid,
+                                       [<In>] string name,
+                                       [<Out>] int16[] value)
+
+    /// <summary>
+    /// Get an attribute array of type long.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="name">Attribute name.</param>
+    /// <param name="value">Pointer that will get array of attribute values.</param>
+    /// <returns>
+    /// - NC_NOERR: for success.
+    /// - NC_EBADID: Bad ncid.
+    ///  -NC_ENOTVAR: Bad varid.
+    ///  -NC_EBADNAME: Bad name. See NetCDF Names.
+    ///  -NC_EINVAL: Invalid parameters.
+    ///  -NC_ENOTATT: Can't find attribute.
+    ///  -NC_ECHAR: Can't convert to or from NC_CHAR.
+    ///  -NC_ENOMEM: Out of memory.
+    ///  -NC_ERANGE: Data conversion went out of range.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_get_att_long([<In>] int ncid,
+                                        [<In>] int varid,
+                                        [<In>] string name,
+                                        [<Out>] int32[] value)
+
+    /// <summary>
+    /// Get an attribute array of type int64.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="name">Attribute name.</param>
+    /// <param name="value">Pointer that will get array of attribute values.</param>
+    /// <returns>
+    /// - NC_NOERR: for success.
+    /// - NC_EBADID: Bad ncid.
+    ///  -NC_ENOTVAR: Bad varid.
+    ///  -NC_EBADNAME: Bad name. See NetCDF Names.
+    ///  -NC_EINVAL: Invalid parameters.
+    ///  -NC_ENOTATT: Can't find attribute.
+    ///  -NC_ECHAR: Can't convert to or from NC_CHAR.
+    ///  -NC_ENOMEM: Out of memory.
+    ///  -NC_ERANGE: Data conversion went out of range.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_get_att_longlong([<In>] int ncid,
+                                            [<In>] int varid,
+                                            [<In>] string name,
+                                            [<Out>] int64[] value)
+
+    /// <summary>
+    /// Get an attribute array of type byte.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="name">Attribute name.</param>
+    /// <param name="value">Pointer that will get array of attribute values.</param>
+    /// <returns>
+    /// - NC_NOERR: for success.
+    /// - NC_EBADID: Bad ncid.
+    ///  -NC_ENOTVAR: Bad varid.
+    ///  -NC_EBADNAME: Bad name. See NetCDF Names.
+    ///  -NC_EINVAL: Invalid parameters.
+    ///  -NC_ENOTATT: Can't find attribute.
+    ///  -NC_ECHAR: Can't convert to or from NC_CHAR.
+    ///  -NC_ENOMEM: Out of memory.
+    ///  -NC_ERANGE: Data conversion went out of range.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_get_att_schar([<In>] int ncid,
+                                         [<In>] int varid,
+                                         [<In>] string name,
+                                         [<Out>] byte[] value)
+
+    /// <summary>
+    /// Get a text attribute.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="name">Attribute name.</param>
+    /// <param name="value">Pointer that will get array of attribute values.</param>
+    /// <returns>
+    /// - NC_NOERR: for success.
+    /// - NC_EBADID: Bad ncid.
+    ///  -NC_ENOTVAR: Bad varid.
+    ///  -NC_EBADNAME: Bad name. See NetCDF Names.
+    ///  -NC_EINVAL: Invalid parameters.
+    ///  -NC_ENOTATT: Can't find attribute.
+    ///  -NC_ECHAR: Can't convert to or from NC_CHAR.
+    ///  -NC_ENOMEM: Out of memory.
+    ///  -NC_ERANGE: Data conversion went out of range.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_get_att_text([<In>] int ncid,
+                                        [<In>] int varid,
+                                        [<In>] string name,
+                                        [<Out>] IntPtr value)
+
+    /// <summary>
+    /// Get an attribute array of type uint.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="name">Attribute name.</param>
+    /// <param name="value">Pointer that will get array of attribute values.</param>
+    /// <returns>
+    /// - NC_NOERR: for success.
+    /// - NC_EBADID: Bad ncid.
+    ///  -NC_ENOTVAR: Bad varid.
+    ///  -NC_EBADNAME: Bad name. See NetCDF Names.
+    ///  -NC_EINVAL: Invalid parameters.
+    ///  -NC_ENOTATT: Can't find attribute.
+    ///  -NC_ECHAR: Can't convert to or from NC_CHAR.
+    ///  -NC_ENOMEM: Out of memory.
+    ///  -NC_ERANGE: Data conversion went out of range.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_get_att_uint([<In>] int ncid,
+                                        [<In>] int varid,
+                                        [<In>] string name,
+                                        [<Out>] uint16[] value)
+
+    /// <summary>
+    /// Get an attribute array of type ulong.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="name">Attribute name.</param>
+    /// <param name="value">Pointer that will get array of attribute values.</param>
+    /// <returns>
+    /// - NC_NOERR: for success.
+    /// - NC_EBADID: Bad ncid.
+    ///  -NC_ENOTVAR: Bad varid.
+    ///  -NC_EBADNAME: Bad name. See NetCDF Names.
+    ///  -NC_EINVAL: Invalid parameters.
+    ///  -NC_ENOTATT: Can't find attribute.
+    ///  -NC_ECHAR: Can't convert to or from NC_CHAR.
+    ///  -NC_ENOMEM: Out of memory.
+    ///  -NC_ERANGE: Data conversion went out of range.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_get_att_ulong([<In>] int ncid,
+                                         [<In>] int varid,
+                                         [<In>] string name,
+                                         [<Out>] uint32[] value)
+
+    /// <summary>
+    /// Get an attribute array of type uint64.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="name">Attribute name.</param>
+    /// <param name="value">Pointer that will get array of attribute values.</param>
+    /// <returns>
+    /// - NC_NOERR: for success.
+    /// - NC_EBADID: Bad ncid.
+    ///  -NC_ENOTVAR: Bad varid.
+    ///  -NC_EBADNAME: Bad name. See NetCDF Names.
+    ///  -NC_EINVAL: Invalid parameters.
+    ///  -NC_ENOTATT: Can't find attribute.
+    ///  -NC_ECHAR: Can't convert to or from NC_CHAR.
+    ///  -NC_ENOMEM: Out of memory.
+    ///  -NC_ERANGE: Data conversion went out of range.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_get_att_ulonglong([<In>] int ncid,
+                                             [<In>] int varid,
+                                             [<In>] string name,
+                                             [<Out>] uint64[] value)
