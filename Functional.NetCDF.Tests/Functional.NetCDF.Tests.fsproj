@@ -20,10 +20,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Compile Include="Native\NetCDF_Test.fs" />
+    <Compile Include="Managed\File_Test.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
-
-  <ItemGroup />
 
   <ItemGroup>
     <ProjectReference Include="..\Functional.NetCDF\Functional.NetCDF.fsproj" />
