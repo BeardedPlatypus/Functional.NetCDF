@@ -449,7 +449,7 @@ module internal NetCDF =
     extern NCReturnCode nc_get_att_text([<In>] int ncid,
                                         [<In>] int varid,
                                         [<In>] string name,
-                                        [<Out>] IntPtr value)
+                                        [<Out>] StringBuilder value)
 
     /// <summary>
     /// Get an attribute array of type uint.

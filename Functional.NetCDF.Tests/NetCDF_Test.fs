@@ -88,3 +88,29 @@ type NetCDF_Test () =
         l |> should equal 17
 
         nc_close(id) |> ignore
+
+    [<Test>]
+    [<TestCase("name", "Unknown projected")>]
+    [<TestCase("grid_mapping_name", "Unknown projected")>]
+    [<TestCase("value", "value is equal to EPSG code")>]
+    [<TestCase("proj_string", "")>]
+    member this.``nc_get_att_text should retrieve the correct string`` ((attributeName: string), (expectedResult: string)) =
+        let mutable id : int = -1
+        nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id) |> ignore
+        
+        let mutable t: NCType = NCType.Byte
+        let mutable l: int = -1
+
+        let varId = 0
+
+        nc_inq_att(id, varId, attributeName, &t, &l) |> ignore
+        
+        let resultString : System.Text.StringBuilder = System.Text.StringBuilder("", l - 1)
+
+        let result = nc_get_att_text(id, varId, attributeName, resultString)
+
+        result |> should equal noError
+        resultString.ToString() |> should equal expectedResult
+
+        nc_close(id) |> ignore
+
