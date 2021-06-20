@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="NetCDF_Test.fs" />
+    <Compile Include="Native\NetCDF_Test.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="xcopy $(SolutionDir)Functional.NetCDF\Lib\*.dll $(OutDir) /Y /C /Q" />
+    <Exec Command="xcopy $(SolutionDir)Functional.NetCDF\Native\Lib\*.dll $(OutDir) /Y /C /Q" />
   </Target>
 
 </Project>

@@ -1,9 +1,9 @@
-namespace BeardedPlatypus.Functional.NetCDF.Tests
+namespace BeardedPlatypus.Functional.NetCDF.Native.Tests
 
 open NUnit.Framework
 open FsUnit
 
-open BeardedPlatypus.Functional.NetCDF.NetCDF
+open BeardedPlatypus.Functional.NetCDF.Native.NetCDF
 
 [<TestFixture>]
 type NetCDF_Test () =

@@ -9,15 +9,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="NetCDF.fs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Lib\" />
+    <Compile Include="Native\NetCDF.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Native\Lib\" />
   </ItemGroup>
 
 </Project>

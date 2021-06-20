@@ -1,4 +1,4 @@
-﻿namespace BeardedPlatypus.Functional.NetCDF
+﻿namespace BeardedPlatypus.Functional.NetCDF.Native
 
 open System.Text
 open System.Runtime.InteropServices
