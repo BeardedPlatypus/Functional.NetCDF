@@ -1,5 +1,5 @@
 # Functional.NetCDF
-[![Build Status](https://dev.azure.com/mwtegelaers/Functional.NetCDF/_apis/build/status/BeardedPlatypus.Functional.NetCDF?branchName=azure-pipelines)](https://dev.azure.com/mwtegelaers/Functional.NetCDF/_build/latest?definitionId=32&branchName=azure-pipelines)
+![GitHub](https://img.shields.io/github/license/BeardedPlatypus/Functional.NetCDF) [![Build Status](https://dev.azure.com/mwtegelaers/Functional.NetCDF/_apis/build/status/BeardedPlatypus.Functional.NetCDF?branchName=azure-pipelines)](https://dev.azure.com/mwtegelaers/Functional.NetCDF/_build/latest?definitionId=32&branchName=azure-pipelines)  
 *This is a work-in-progress and will be extended in the near-future*
 
 A simple .NET NetCDF4 wrapper for windows written in F# targeting NETStandard 2.0.
