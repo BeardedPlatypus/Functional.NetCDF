@@ -566,7 +566,7 @@ module internal NetCDF =
                                          [<Out>] float32[] ip)
 
     /// <summary>
-    /// Read the specified <paramref name="varid"/> as an array of ints
+    /// Read the specified <paramref name="varid"/> as an array of int16
     /// into the pre-allocated <paramref name="ip"/> array.
     /// </summary>
     /// <param name="ncid">File and group ID</param>
@@ -583,3 +583,22 @@ module internal NetCDF =
     extern NCReturnCode nc_get_var_int([<In>] int ncid, 
                                        [<In>] int varid,
                                        [<Out>] int16[] ip)
+
+    /// <summary>
+    /// Read the specified <paramref name="varid"/> as an array of int32
+    /// into the pre-allocated <paramref name="ip"/> array.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="ip">Pointer to where the data will be copied.</param>
+    /// <returns>
+    /// - NC_NOERR: No error.
+    /// - NC_ENOTVAR: Variable not found.
+    /// - NC_ERANGE: One or more of the values are out of range.
+    /// - NC_EINDEFINE: Operation not allowed in define mode.
+    /// - NC_EBADID: Bad ncid.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_get_var_long([<In>] int ncid, 
+                                        [<In>] int varid,
+                                        [<Out>] int32[] ip)
