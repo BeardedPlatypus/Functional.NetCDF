@@ -199,3 +199,28 @@ type NetCDF_Test () =
         nDimensions |> should equal expectedDimensionSize
 
         nc_close(id) |> ignore
+
+    [<Test>]
+    [<TestCase("time", [|5|])>]
+    [<TestCase("mesh2d_taus", [| 5; 3 |])>]
+    [<TestCase("mesh2d_ucy", [| 5; 3 |])>]
+    member this.``nc_inq_vardimid should retrieve the correct dimension ids`` ((name: string), (expectedDimIDs: int[])) =
+        let mutable id : int = -1
+        nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id) |> ignore
+        
+        let mutable varId = 0
+
+        nc_inq_varid(id, name, &varId) |> ignore
+
+        let mutable nDimensions = -1
+
+        nc_inq_varndims(id, varId, &nDimensions) |> ignore
+
+        let dimIDs: int[] = Array.create nDimensions -1
+
+        let result = nc_inq_vardimid(id, varId, dimIDs)
+
+        result |> should equal noError
+        dimIDs |> should equal expectedDimIDs
+
+        nc_close(id) |> ignore

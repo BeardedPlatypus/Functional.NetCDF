@@ -749,6 +749,20 @@ module internal NetCDF =
                                         [<In>] int varid,
                                         [<Out>] int& ndimsp)
 
-
+    /// <summary>
+    /// Retrieve the dimension ids associated with variable <paramref name="varid"/>.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="dimidsp">Pointer to the dimension id array.</param>
+    /// <returns>
+    /// - NC_NOERR No error.
+    /// - NC_EBADID Bad ncid.
+    /// - NC_ENOTVAR Invalid variable ID.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_inq_vardimid([<In>] int ncid, 
+                                        [<In>] int varid,
+                                        [<Out>] int[] dimidsp)
 
     
