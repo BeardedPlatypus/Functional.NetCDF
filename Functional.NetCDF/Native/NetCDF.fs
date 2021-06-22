@@ -732,3 +732,23 @@ module internal NetCDF =
     extern NCReturnCode nc_inq_varid([<In>] int ncid, 
                                      [<In>] string name,
                                      [<Out>] int& varidp)
+
+    /// <summary>
+    /// Retrieve the number of dimensions of the data of <paramref name="varid"/>.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Variable ID</param>
+    /// <param name="ndimsp">Pointer to where the number of dimensions will be stored.</param>
+    /// <returns>
+    /// - NC_NOERR No error.
+    /// - NC_EBADID Bad ncid.
+    /// - NC_ENOTVAR Invalid variable ID.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_inq_varndims([<In>] int ncid, 
+                                        [<In>] int varid,
+                                        [<Out>] int& ndimsp)
+
+
+
+    
