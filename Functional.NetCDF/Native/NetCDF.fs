@@ -717,3 +717,18 @@ module internal NetCDF =
                                              [<In>] int varid,
                                              [<Out>] int64[] ip)
 
+    /// <summary>
+    /// Find the ID of a variable with the name <paramref name="name"/>.
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="name">The name of the variable to retrieve</param>
+    /// <param name="varidp">Pointer to the location for the returned variable ID</param>
+    /// <returns>
+    /// - NC_NOERR No error.
+    /// - NC_EBADID Bad ncid.
+    /// - NC_ENOTVAR Invalid variable ID.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_inq_varid([<In>] int ncid, 
+                                     [<In>] string name,
+                                     [<Out>] int& varidp)
