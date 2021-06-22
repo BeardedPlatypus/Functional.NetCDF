@@ -159,3 +159,21 @@ type NetCDF_Test () =
         resultArray |> should equal [| expectedResult |]
 
         nc_close(id) |> ignore
+
+    [<Test>]
+    [<TestCase("time", 17)>]
+    [<TestCase("mesh2d", 1)>]
+    [<TestCase("mesh2d_taus", 31)>]
+    [<TestCase("mesh2d_ucy", 26)>]
+    member this.``nc_inq_varid should retrieve the correct variable id`` ((name: string), (expectedVarID: int)) =
+        let mutable id : int = -1
+        nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id) |> ignore
+        
+        let mutable varId = 0
+
+        let result = nc_inq_varid(id, name, &varId)
+
+        result |> should equal noError
+        varId |> should equal expectedVarID
+
+        nc_close(id) |> ignore
