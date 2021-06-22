@@ -224,3 +224,19 @@ type NetCDF_Test () =
         dimIDs |> should equal expectedDimIDs
 
         nc_close(id) |> ignore
+
+    [<Test>]
+    [<TestCase(3, 25)>]
+    [<TestCase(5, 73)>]
+    member this.``nc_inq_dimlen should retrieve the correct dimension length`` ((dimID: int), (expectedDimLength: int)) =
+        let mutable id : int = -1
+        nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id) |> ignore
+
+        let mutable dimLen = -1
+        
+        let result = nc_inq_dimlen(id, dimID, &dimLen)
+
+        result |> should equal noError
+        dimLen |> should equal expectedDimLength
+
+        nc_close(id) |> ignore

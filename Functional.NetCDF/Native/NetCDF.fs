@@ -765,4 +765,18 @@ module internal NetCDF =
                                         [<In>] int varid,
                                         [<Out>] int[] dimidsp)
 
-    
+    /// <summary>
+    /// Retrieve the length of a dimension
+    /// </summary>
+    /// <param name="ncid">File and group ID</param>
+    /// <param name="varid">Dimension ID</param>
+    /// <param name="lenp">Pointer to where the length will be stored.</param>
+    /// <returns>
+    /// - NC_NOERR No error.
+    /// - NC_EBADID Bad ncid.
+    /// - NC_EBADDIM Invalid dimension ID or name.
+    /// </returns>
+    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
+    extern NCReturnCode nc_inq_dimlen([<In>] int ncid, 
+                                      [<In>] int dimid,
+                                      [<Out>] int& lenp)
