@@ -163,6 +163,15 @@ type internal IFile =
     abstract member RetrieveVariableID: variableName: string -> Result<VarID, NCReturnCode>
 
     /// <summary>
+    /// Retrieve the number of dimensions of the value associated with <paramref name="variableID"/>.
+    /// </summary>
+    /// <param name="variableID">The id of the variable.</param>
+    /// <returns>
+    /// The number of dimensions if succesful; otherwise the error code.
+    /// </returns>
+    abstract member RetrieveNumberDimensions: variableID: VarID -> Result<int, NCReturnCode>
+
+    /// <summary>
     /// Retrieve the the double values associated with <paramref name="variableID"/>
     /// </summary>
     /// <param name="variableID">The id of the variable.</param>
