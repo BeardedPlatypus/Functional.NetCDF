@@ -148,3 +148,14 @@ type File_Test () =
 
         let expectedResult: Result<Common.DimID[], NCReturnCode> = Result.Ok (Array.map Common.DimID expectedDimIDs)
         result |> should equal expectedResult
+
+    [<Test>]
+    [<TestCase(3, 25)>]
+    [<TestCase(5, 73)>]
+    member this.``nc_inq_dimlen should retrieve the correct dimension length`` ((dimID: int), (expectedDimLength: int)) =
+        use ncFile = openFile "./test-data/map.nc"
+
+        let result = ncFile.RetrieveDimensionValue (Common.DimID dimID)
+
+        let expectedResult: Result<int, NCReturnCode> = Result.Ok expectedDimLength 
+        result |> should equal expectedResult

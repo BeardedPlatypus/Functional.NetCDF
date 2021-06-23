@@ -100,6 +100,11 @@ type internal File (ncId: NcID) =
             let returnCode = nc_inq_vardimid(localId, variableID.ToInt(), dimIDs)
             toResult (Array.map DimID) returnCode dimIDs
 
+        member this.RetrieveDimensionValue (dimensionID: DimID): Result<int, NCReturnCode> =
+            let mutable dimSize = -1
+            let returnCode = nc_inq_dimlen(localId, dimensionID.ToInt (), &dimSize)
+            toResult id returnCode dimSize
+
         member this.RetrieveVariableValueDouble (variableID: VarID) (valueSize: int) : Result<double[], NCReturnCode> =
             let resultArray = Array.zeroCreate valueSize
             let returnCode = nc_get_var_double(localId, variableID.ToInt(), resultArray)
