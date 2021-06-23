@@ -33,56 +33,61 @@ type internal File (ncId: NcID) =
             let result = nc_inq_varname(localId, variableID.ToInt(), resultString)
             toResult sb result resultString
 
-        member this.RetrieveNAttributes(variableID: VarID): Result<int,NCReturnCode> = 
+        member this.RetrieveNAttributes (variableID: VarID): Result<int,NCReturnCode> = 
             let mutable nAttributes = -1
             let returnCode = nc_inq_varnatts(localId, variableID.ToInt(), &nAttributes)
             toResult id returnCode nAttributes
 
-        member this.RetrieveAttributeName(variableID: VarID) (attributeNumber: int): Result<string,NCReturnCode> = 
+        member this.RetrieveAttributeName (variableID: VarID) (attributeNumber: int): Result<string,NCReturnCode> = 
             let resultString = System.Text.StringBuilder("", NC_MAX_NAME)
             let returnCode = nc_inq_attname(localId, variableID.ToInt(), attributeNumber, resultString)
             toResult sb returnCode resultString
 
-        member this.RetrieveAttributeInformation(variableID: VarID) (attributeName: string): Result<AttributeTypeInformation,NCReturnCode> =
+        member this.RetrieveAttributeInformation (variableID: VarID) (attributeName: string): Result<AttributeTypeInformation,NCReturnCode> =
             let mutable ncType : NCType = NCType.Byte
             let mutable len: int = -1
 
             let returnCode = nc_inq_att(localId, variableID.ToInt(), attributeName, &ncType, &len)
             toResult (fun (nt: NCType, l: int) -> { AttributeTypeInformation.T = nt; AttributeTypeInformation.Size = l }) returnCode (ncType, len)
 
-        member this.RetrieveAttributeValueDouble(variableID: VarID) (attributeName: string) (attributeSize: int): Result<double [],NCReturnCode> = 
+        member this.RetrieveAttributeValueDouble (variableID: VarID) (attributeName: string) (attributeSize: int): Result<double [],NCReturnCode> = 
             let resultArray = Array.zeroCreate attributeSize
             let returnCode = nc_get_att_double(localId, variableID.ToInt(), attributeName, resultArray)
             toResult id returnCode resultArray
 
-        member this.RetrieveAttributeValueFloat(variableID: VarID) (attributeName: string) (attributeSize: int): Result<float32 [],NCReturnCode> = 
+        member this.RetrieveAttributeValueFloat (variableID: VarID) (attributeName: string) (attributeSize: int): Result<float32 [],NCReturnCode> = 
             let resultArray = Array.zeroCreate attributeSize
             let returnCode = nc_get_att_float(localId, variableID.ToInt(), attributeName, resultArray)
             toResult id returnCode resultArray
 
-        member this.RetrieveAttributeValueInt(variableID: VarID) (attributeName: string) (attributeSize: int): Result<int32[] ,NCReturnCode> = 
+        member this.RetrieveAttributeValueInt (variableID: VarID) (attributeName: string) (attributeSize: int): Result<int32[] ,NCReturnCode> = 
             let resultArray = Array.zeroCreate attributeSize
             let returnCode = nc_get_att_int(localId, variableID.ToInt(), attributeName, resultArray)
             toResult id returnCode resultArray
         
-        member this.RetrieveAttributeValueLong(variableID: VarID) (attributeName: string) (attributeSize: int): Result<int64 [],NCReturnCode> = 
+        member this.RetrieveAttributeValueLong (variableID: VarID) (attributeName: string) (attributeSize: int): Result<int64 [],NCReturnCode> = 
             let resultArray = Array.zeroCreate attributeSize
             let returnCode = nc_get_att_long(localId, variableID.ToInt(), attributeName, resultArray)
             toResult id returnCode resultArray
 
-        member this.RetrieveAttributeValueText(variableID: VarID) (attributeName: string) (attributeSize: int): Result<string,NCReturnCode> = 
+        member this.RetrieveAttributeValueText (variableID: VarID) (attributeName: string) (attributeSize: int): Result<string,NCReturnCode> = 
             let resultString = System.Text.StringBuilder("", attributeSize)
             let returnCode = nc_get_att_text(localId, variableID.ToInt(), attributeName, resultString)
             toResult sb returnCode resultString
 
-        member this.RetrieveAttributeValueUInt(variableID: VarID) (attributeName: string) (attributeSize: int): Result<uint32 [],NCReturnCode> = 
+        member this.RetrieveAttributeValueUInt (variableID: VarID) (attributeName: string) (attributeSize: int): Result<uint32 [],NCReturnCode> = 
             let resultArray = Array.zeroCreate attributeSize
             let returnCode = nc_get_att_uint(localId, variableID.ToInt(), attributeName, resultArray)
             toResult id returnCode resultArray
 
-        member this.RetrieveAttributeValueULong(variableID: VarID) (attributeName: string) (attributeSize: int): Result<uint64 [],NCReturnCode> = 
+        member this.RetrieveAttributeValueULong (variableID: VarID) (attributeName: string) (attributeSize: int): Result<uint64 [],NCReturnCode> = 
             let resultArray = Array.zeroCreate attributeSize
             let returnCode = nc_get_att_ulong(localId, variableID.ToInt(), attributeName, resultArray)
+            toResult id returnCode resultArray
+
+        member this.RetrieveVariableValueDouble (variableID: VarID) (valueSize: int) : Result<double[], NCReturnCode> =
+            let resultArray = Array.zeroCreate valueSize
+            let returnCode = nc_get_var_double(localId, variableID.ToInt(), resultArray)
             toResult id returnCode resultArray
 
     interface System.IDisposable with
