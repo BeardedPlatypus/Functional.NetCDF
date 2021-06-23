@@ -172,6 +172,17 @@ type internal IFile =
     abstract member RetrieveNumberDimensions: variableID: VarID -> Result<int, NCReturnCode>
 
     /// <summary>
+    /// Retrieve the <see cref="DimID"/> values associated with <paramref name="variableID"/>
+    /// </summary>
+    /// <param name="variableID">The id of the variable.</param>
+    /// <param name="nDimensions">The number of dimension ids.</param>
+    /// <returns>
+    /// An array containing the <see cref="DimID"/> associated with 
+    /// <paramref name="variableID"/> if succesful; otherwise the error code.
+    /// </returns>
+    abstract member RetrieveDimensionIDs: variableID: VarID -> nDimensions: int -> Result<DimID[], NCReturnCode>
+
+    /// <summary>
     /// Retrieve the the double values associated with <paramref name="variableID"/>
     /// </summary>
     /// <param name="variableID">The id of the variable.</param>

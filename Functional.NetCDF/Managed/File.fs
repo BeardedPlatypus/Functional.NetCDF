@@ -95,6 +95,11 @@ type internal File (ncId: NcID) =
             let returnCode = nc_inq_varndims(localId, variableID.ToInt(), &nDimensions)
             toResult id returnCode nDimensions
 
+        member this.RetrieveDimensionIDs (variableID: VarID) (nDimensions: int): Result<DimID[], NCReturnCode> =
+            let dimIDs: int[] = Array.zeroCreate nDimensions
+            let returnCode = nc_inq_vardimid(localId, variableID.ToInt(), dimIDs)
+            toResult (Array.map DimID) returnCode dimIDs
+
         member this.RetrieveVariableValueDouble (variableID: VarID) (valueSize: int) : Result<double[], NCReturnCode> =
             let resultArray = Array.zeroCreate valueSize
             let returnCode = nc_get_var_double(localId, variableID.ToInt(), resultArray)

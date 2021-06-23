@@ -126,11 +126,25 @@ type File_Test () =
     member this.``RetrieveNumberDimensions should retrieve the correct dimension size`` ((name: string), (expectedDimensionSize: int)) =
         use ncFile = openFile "./test-data/map.nc"
         
-        let mutable varId = 0
-
         let result = 
             ncFile.RetrieveVariableID name
             |> Result.bind (fun (id: Common.VarID) -> ncFile.RetrieveNumberDimensions id)
 
         let expectedResult: Result<int, NCReturnCode> = Result.Ok expectedDimensionSize
+        result |> should equal expectedResult
+
+    [<Test>]
+    [<TestCase("time", [|5|])>]
+    [<TestCase("mesh2d_taus", [| 5; 3 |])>]
+    [<TestCase("mesh2d_ucy", [| 5; 3 |])>]
+    member this.``RetrieveDimensionIDs should retrieve the correct dimension ids`` ((name: string), (expectedDimIDs: int[])) =
+        use ncFile = openFile "./test-data/map.nc"
+
+        let result = 
+            ncFile.RetrieveVariableID name
+            |> Result.bind (fun (id: Common.VarID) -> (ncFile.RetrieveNumberDimensions id)
+                                                      |> Result.map (fun nDim -> (id, nDim)))
+            |> Result.bind (fun ((id:Common.VarID), (nDim: int)) -> ncFile.RetrieveDimensionIDs id nDim)
+
+        let expectedResult: Result<Common.DimID[], NCReturnCode> = Result.Ok (Array.map Common.DimID expectedDimIDs)
         result |> should equal expectedResult
