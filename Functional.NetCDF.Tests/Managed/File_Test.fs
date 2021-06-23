@@ -159,3 +159,47 @@ type File_Test () =
 
         let expectedResult: Result<int, NCReturnCode> = Result.Ok expectedDimLength 
         result |> should equal expectedResult
+
+    [<Test>]
+    [<TestCase("time", 73, [| 0.0; 1200.0; 2400.0; 3600.0; 4800.0; 6000.0; 7200.0; 8400.0; 9600.0; 10800.0 |])>]
+    [<TestCase("mesh2d_face_x_bnd", 100, [| 0.0; 100.0; 100.0; 0.0; 100.0; 200.0; 200.0; 100.0; 0.0; 100.0 |])>]
+    member this.``nc_get_var_double should retrieve the correct data`` ((name: string), 
+                                                                        (expectedDataSize: int), 
+                                                                        (firstValues: double[])) =
+        use ncFile = openFile "./test-data/map.nc"
+
+
+        let getSize (dimIDs: Common.DimID[]): Result<int, NCReturnCode> =
+            let folder (accResult: Result<int, NCReturnCode>) (id: Common.DimID): Result<int, NCReturnCode> =
+                let sizeResult = ncFile.RetrieveDimensionValue id
+
+                match sizeResult, accResult with 
+                | Result.Ok size, Result.Ok acc -> Result.Ok (size * acc)
+                | _, Result.Error _ -> accResult
+                | Result.Error _, _ -> sizeResult
+
+            Array.fold folder (Result.Ok 1) dimIDs
+              
+
+        let result = 
+            ncFile.RetrieveVariableID name
+            |> Result.bind (fun (id: Common.VarID) -> (ncFile.RetrieveNumberDimensions id)
+                                                      |> Result.map (fun nDim -> (id, nDim)))
+            |> Result.bind (fun ((id:Common.VarID), (nDim: int)) -> (ncFile.RetrieveDimensionIDs id nDim)
+                                                                    |> Result.map (fun dimIDs -> (id, dimIDs)))
+            |> Result.bind (fun ((id:Common.VarID), (dimIDs: Common.DimID[])) -> getSize dimIDs
+                                                                                 |> Result.map (fun size -> (id, size)))
+            |> Result.bind (fun ((id:Common.VarID), (size: int)) -> ncFile.RetrieveVariableValueDouble id size )
+
+        let expectedSize: Result<int, NCReturnCode> = 
+            Result.Ok expectedDataSize
+        let actualSize: Result<int, NCReturnCode> = 
+            result |> Result.map(fun da -> da.Length)
+        actualSize |> should equal expectedSize
+
+        let expectedFirstValues: Result<double[], NCReturnCode> = 
+            Result.Ok firstValues
+        let actualFirstValues: Result<double[], NCReturnCode> = 
+            result |> Result.map (fun (values) -> Array.take (firstValues.Length) values)
+        actualFirstValues |> should equal expectedFirstValues
+
