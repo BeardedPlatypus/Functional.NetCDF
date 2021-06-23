@@ -240,3 +240,38 @@ type NetCDF_Test () =
         dimLen |> should equal expectedDimLength
 
         nc_close(id) |> ignore
+
+    [<Test>]
+    [<TestCase("time", 73, [| 0.0; 1200.0; 2400.0; 3600.0; 4800.0; 6000.0; 7200.0; 8400.0; 9600.0; 10800.0 |])>]
+    [<TestCase("mesh2d_face_x_bnd", 100, [| 0.0; 100.0; 100.0; 0.0; 100.0; 200.0; 200.0; 100.0; 0.0; 100.0 |])>]
+    member this.``nc_get_var_double should retrieve the correct data`` ((name: string), (expectedDataSize: int), (firstValues: double[])) =
+        let mutable id : int = -1
+        nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id) |> ignore
+        
+        let mutable varId = 0
+
+        nc_inq_varid(id, name, &varId) |> ignore
+
+        let mutable nDimensions = -1
+
+        nc_inq_varndims(id, varId, &nDimensions) |> ignore
+
+        let dimIDs: int[] = Array.create nDimensions -1
+
+        nc_inq_vardimid(id, varId, dimIDs) |> ignore
+
+        let mutable size : int = 1
+        let mutable dimLen : int = -1
+
+        for dimID in dimIDs do
+            nc_inq_dimlen(id, dimID, &dimLen) |> ignore
+            size <- size * dimLen
+
+        let resultArray : double[] = Array.zeroCreate size
+        let result = nc_get_var_double(id, varId, resultArray)
+
+        result |> should equal noError
+        resultArray.Length |> should equal expectedDataSize
+        (Array.take (firstValues.Length) resultArray) |> should equal firstValues
+
+        nc_close(id) |> ignore
