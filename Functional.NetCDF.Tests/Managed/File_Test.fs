@@ -104,3 +104,17 @@ type File_Test () =
 
         let expectedResult: Result<double[],NCReturnCode> = Result.Ok [| expectedResultValue |]
         result |> should equal expectedResult
+
+    [<Test>]
+    [<TestCase("time", 17)>]
+    [<TestCase("mesh2d", 1)>]
+    [<TestCase("mesh2d_taus", 31)>]
+    [<TestCase("mesh2d_ucy", 26)>]
+    member this.``RetrieveVariableID should retrieve the correct VarID`` ((variableName: string), (expectedID: int)) =
+        use ncFile = openFile "./test-data/map.nc"
+
+        let result = ncFile.RetrieveVariableID variableName
+        
+        let expectedResult: Result<Common.VarID, NCReturnCode> = Result.Ok (Common.VarID expectedID)
+        result |> should equal expectedResult
+

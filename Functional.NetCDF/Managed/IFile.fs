@@ -154,12 +154,21 @@ type internal IFile =
     abstract member RetrieveAttributeValueText: variableID: VarID -> attributeName: string -> attributeSize: int -> Result<string, NCReturnCode>
 
     /// <summary>
+    /// Retrieve the <see cref="VarID"/> associated with provided <paramref name="variableName"/>
+    /// </summary>
+    /// <param name="variableName">The name of the variable</param>
+    /// <returns>
+    /// The <see cref="VarID"/> if succesful; otherwise the error code.
+    /// </returns>
+    abstract member RetrieveVariableID: variableName: string -> Result<VarID, NCReturnCode>
+
+    /// <summary>
     /// Retrieve the the double values associated with <paramref name="variableID"/>
     /// </summary>
     /// <param name="variableID">The id of the variable.</param>
     /// <param name="valueSize"> The number of values.</param>
     /// <returns>
     /// An array containing the values as doubles associated with 
-    /// <paramref name="variableID"/>.
+    /// <paramref name="variableID"/> if succesful; otherwise the error code.
     /// </returns>
     abstract member RetrieveVariableValueDouble : variableID: VarID -> valueSize: int -> Result<double[], NCReturnCode>

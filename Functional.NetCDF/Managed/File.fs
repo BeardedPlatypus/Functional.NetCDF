@@ -85,6 +85,11 @@ type internal File (ncId: NcID) =
             let returnCode = nc_get_att_ulong(localId, variableID.ToInt(), attributeName, resultArray)
             toResult id returnCode resultArray
 
+        member this.RetrieveVariableID (variableName: string): Result<VarID, NCReturnCode> =
+            let mutable varID = -1
+            let returnCode = nc_inq_varid(localId, variableName, &varID)
+            toResult (fun (id: int) -> VarID id) returnCode varID
+
         member this.RetrieveVariableValueDouble (variableID: VarID) (valueSize: int) : Result<double[], NCReturnCode> =
             let resultArray = Array.zeroCreate valueSize
             let returnCode = nc_get_var_double(localId, variableID.ToInt(), resultArray)
