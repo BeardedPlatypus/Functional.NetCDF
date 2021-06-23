@@ -22,6 +22,13 @@ module internal Common =
                  member this.ToInt () = match this with | VarID i -> i
 
     /// <summary>
+    /// <see cref="DimID"/> defines the id of a NetCDF file dimension.
+    /// </summary>
+    [<Struct>]
+    type DimID = | DimID of int 
+                 member this.ToInt () = match this with | DimID i -> i
+
+    /// <summary>
     /// <see cref="AttributeTypeInformation"/> defines the size and type
     /// information of an attribute.
     /// </summary>
