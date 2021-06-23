@@ -7,7 +7,7 @@ open BeardedPlatypus.Functional.NetCDF.Native.NetCDF
 open BeardedPlatypus.Functional.NetCDF.Managed
 
 [<TestFixture>]
-type NetCDF_Test () =
+type File_Test () =
     let openFile (path: string) : IFile = 
         let mutable id : int = -1
         nc_open("./test-data/map.nc", NCOpenMode.NoWrite, &id) |> ignore
