@@ -90,20 +90,7 @@ type internal IFile =
     abstract member RetrieveAttributeValueFloat: variableID: VarID -> attributeName: string -> attributeSize: int -> Result<float32[], NCReturnCode>
 
     /// <summary>
-    /// Retrieve the int attribute values of <paramref name="attributeName"/> 
-    /// of the variable associated with <paramref name="variableID"/>.
-    /// </summary>
-    /// <param name="variableID">The id of the variable.</param>
-    /// <param name="attributeName"> The name of the attribute.</param>
-    /// <param name="attributeSize"> The size of the attribute.</param>
-    /// <returns>
-    /// An array containing the attribute values as ints if succesful;
-    /// otherwise the error code.
-    /// </returns>
-    abstract member RetrieveAttributeValueInt: variableID: VarID -> attributeName: string -> attributeSize: int -> Result<int16[], NCReturnCode>
-
-    /// <summary>
-    /// Retrieve the long attribute values of <paramref name="attributeName"/> 
+    /// Retrieve the int32 attribute values of <paramref name="attributeName"/> 
     /// of the variable associated with <paramref name="variableID"/>.
     /// </summary>
     /// <param name="variableID">The id of the variable.</param>
@@ -113,7 +100,7 @@ type internal IFile =
     /// An array containing the attribute values as longs if succesful;
     /// otherwise the error code.
     /// </returns>
-    abstract member RetrieveAttributeValueLong: variableID: VarID -> attributeName: string -> attributeSize: int -> Result<int32[], NCReturnCode>
+    abstract member RetrieveAttributeValueInt: variableID: VarID -> attributeName: string -> attributeSize: int -> Result<int32[], NCReturnCode>
 
     /// <summary>
     /// Retrieve the int64 attribute values of <paramref name="attributeName"/> 
@@ -126,7 +113,7 @@ type internal IFile =
     /// An array containing the attribute values as int64 if succesful;
     /// otherwise the error code.
     /// </returns>
-    abstract member RetrieveAttributeValueLongLong: variableID: VarID -> attributeName: string -> attributeSize: int -> Result<int64[], NCReturnCode>
+    abstract member RetrieveAttributeValueLong: variableID: VarID -> attributeName: string -> attributeSize: int -> Result<int64[], NCReturnCode>
 
     /// <summary>
     /// Retrieve the uint attribute values of <paramref name="attributeName"/> 
@@ -139,7 +126,7 @@ type internal IFile =
     /// An array containing the attribute values as uints if succesful;
     /// otherwise the error code.
     /// </returns>
-    abstract member RetrieveAttributeValueUInt: variableID: VarID -> attributeName: string -> attributeSize: int -> Result<uint16[], NCReturnCode>
+    abstract member RetrieveAttributeValueUInt: variableID: VarID -> attributeName: string -> attributeSize: int -> Result<uint32[], NCReturnCode>
 
     /// <summary>
     /// Retrieve the ulong attribute values of <paramref name="attributeName"/> 
@@ -152,20 +139,7 @@ type internal IFile =
     /// An array containing the attribute values as ulongs if succesful;
     /// otherwise the error code.
     /// </returns>
-    abstract member RetrieveAttributeValueULong: variableID: VarID -> attributeName: string -> attributeSize: int -> Result<uint32[], NCReturnCode>
-
-    /// <summary>
-    /// Retrieve the uint64 attribute values of <paramref name="attributeName"/> 
-    /// of the variable associated with <paramref name="variableID"/>.
-    /// </summary>
-    /// <param name="variableID">The id of the variable.</param>
-    /// <param name="attributeName"> The name of the attribute.</param>
-    /// <param name="attributeSize"> The size of the attribute.</param>
-    /// <returns>
-    /// An array containing the attribute values as uint64 if succesful;
-    /// otherwise the error code.
-    /// </returns>
-    abstract member RetrieveAttributeValueULongLong: variableID: VarID -> attributeName: string -> attributeSize: int -> Result<uint64[], NCReturnCode>
+    abstract member RetrieveAttributeValueULong: variableID: VarID -> attributeName: string -> attributeSize: int -> Result<uint64[], NCReturnCode>
 
     /// <summary>
     /// Retrieve the string attribute values of <paramref name="attributeName"/> 

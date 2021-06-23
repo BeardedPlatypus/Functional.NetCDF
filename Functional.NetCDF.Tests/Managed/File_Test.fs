@@ -86,7 +86,7 @@ type File_Test () =
             ncFile.RetrieveAttributeInformation varId attributeName
             |> Result.bind (fun (v: Common.AttributeTypeInformation) -> ncFile.RetrieveAttributeValueInt varId attributeName v.Size )
 
-        let expectedResult: Result<int16[],NCReturnCode> = Result.Ok [| 0s |]
+        let expectedResult: Result<int32[],NCReturnCode> = Result.Ok [| 0 |]
         result |> should equal expectedResult
 
     [<Test>]

@@ -128,11 +128,11 @@ type NetCDF_Test () =
 
         nc_inq_att(id, varId, attributeName, &t, &l) |> ignore
          
-        let resultArray = Array.create l -1s
+        let resultArray = Array.create l -1
         let result = nc_get_att_int(id, varId, attributeName, resultArray)
 
         result |> should equal noError
-        resultArray |> should equal [| 0s |]
+        resultArray |> should equal [| 0 |]
 
         nc_close(id) |> ignore
 

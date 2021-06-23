@@ -357,7 +357,7 @@ module internal NetCDF =
     extern NCReturnCode nc_get_att_int([<In>] int ncid,
                                        [<In>] int varid,
                                        [<In>] string name,
-                                       [<Out>] int16[] value)
+                                       [<Out>] int32[] value)
 
     /// <summary>
     /// Get an attribute array of type long.
@@ -381,31 +381,7 @@ module internal NetCDF =
     extern NCReturnCode nc_get_att_long([<In>] int ncid,
                                         [<In>] int varid,
                                         [<In>] string name,
-                                        [<Out>] int32[] value)
-
-    /// <summary>
-    /// Get an attribute array of type int64.
-    /// </summary>
-    /// <param name="ncid">File and group ID</param>
-    /// <param name="varid">Variable ID</param>
-    /// <param name="name">Attribute name.</param>
-    /// <param name="value">Pointer that will get array of attribute values.</param>
-    /// <returns>
-    /// - NC_NOERR: for success.
-    /// - NC_EBADID: Bad ncid.
-    ///  -NC_ENOTVAR: Bad varid.
-    ///  -NC_EBADNAME: Bad name. See NetCDF Names.
-    ///  -NC_EINVAL: Invalid parameters.
-    ///  -NC_ENOTATT: Can't find attribute.
-    ///  -NC_ECHAR: Can't convert to or from NC_CHAR.
-    ///  -NC_ENOMEM: Out of memory.
-    ///  -NC_ERANGE: Data conversion went out of range.
-    /// </returns>
-    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
-    extern NCReturnCode nc_get_att_longlong([<In>] int ncid,
-                                            [<In>] int varid,
-                                            [<In>] string name,
-                                            [<Out>] int64[] value)
+                                        [<Out>] int64[] value)
 
     /// <summary>
     /// Get an attribute array of type byte.
@@ -477,7 +453,7 @@ module internal NetCDF =
     extern NCReturnCode nc_get_att_uint([<In>] int ncid,
                                         [<In>] int varid,
                                         [<In>] string name,
-                                        [<Out>] uint16[] value)
+                                        [<Out>] uint32[] value)
 
     /// <summary>
     /// Get an attribute array of type ulong.
@@ -501,31 +477,7 @@ module internal NetCDF =
     extern NCReturnCode nc_get_att_ulong([<In>] int ncid,
                                          [<In>] int varid,
                                          [<In>] string name,
-                                         [<Out>] uint32[] value)
-
-    /// <summary>
-    /// Get an attribute array of type uint64.
-    /// </summary>
-    /// <param name="ncid">File and group ID</param>
-    /// <param name="varid">Variable ID</param>
-    /// <param name="name">Attribute name.</param>
-    /// <param name="value">Pointer that will get array of attribute values.</param>
-    /// <returns>
-    /// - NC_NOERR: for success.
-    /// - NC_EBADID: Bad ncid.
-    ///  -NC_ENOTVAR: Bad varid.
-    ///  -NC_EBADNAME: Bad name. See NetCDF Names.
-    ///  -NC_EINVAL: Invalid parameters.
-    ///  -NC_ENOTATT: Can't find attribute.
-    ///  -NC_ECHAR: Can't convert to or from NC_CHAR.
-    ///  -NC_ENOMEM: Out of memory.
-    ///  -NC_ERANGE: Data conversion went out of range.
-    /// </returns>
-    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
-    extern NCReturnCode nc_get_att_ulonglong([<In>] int ncid,
-                                             [<In>] int varid,
-                                             [<In>] string name,
-                                             [<Out>] uint64[] value)
+                                         [<Out>] uint64[] value)
 
     /// <summary>
     /// Read the specified <paramref name="varid"/> as an array of doubles
@@ -582,7 +534,7 @@ module internal NetCDF =
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
     extern NCReturnCode nc_get_var_int([<In>] int ncid, 
                                        [<In>] int varid,
-                                       [<Out>] int16[] ip)
+                                       [<Out>] int32[] ip)
 
     /// <summary>
     /// Read the specified <paramref name="varid"/> as an array of int32
@@ -601,26 +553,7 @@ module internal NetCDF =
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
     extern NCReturnCode nc_get_var_long([<In>] int ncid, 
                                         [<In>] int varid,
-                                        [<Out>] int32[] ip)
-
-    /// <summary>
-    /// Read the specified <paramref name="varid"/> as an array of int64
-    /// into the pre-allocated <paramref name="ip"/> array.
-    /// </summary>
-    /// <param name="ncid">File and group ID</param>
-    /// <param name="varid">Variable ID</param>
-    /// <param name="ip">Pointer to where the data will be copied.</param>
-    /// <returns>
-    /// - NC_NOERR: No error.
-    /// - NC_ENOTVAR: Variable not found.
-    /// - NC_ERANGE: One or more of the values are out of range.
-    /// - NC_EINDEFINE: Operation not allowed in define mode.
-    /// - NC_EBADID: Bad ncid.
-    /// </returns>
-    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
-    extern NCReturnCode nc_get_var_longlong([<In>] int ncid, 
-                                            [<In>] int varid,
-                                            [<Out>] int64[] ip)
+                                        [<Out>] int64[] ip)
 
     /// <summary>
     /// Read the specified <paramref name="varid"/> as an array of bytes
@@ -661,7 +594,7 @@ module internal NetCDF =
                                         [<Out>] StringBuilder ip)
 
     /// <summary>
-    /// Read the specified <paramref name="varid"/> as an array of uint16
+    /// Read the specified <paramref name="varid"/> as an array of uint32
     /// into the pre-allocated <paramref name="ip"/> array.
     /// </summary>
     /// <param name="ncid">File and group ID</param>
@@ -677,26 +610,7 @@ module internal NetCDF =
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
     extern NCReturnCode nc_get_var_uint([<In>] int ncid, 
                                         [<In>] int varid,
-                                        [<Out>] uint16[] ip)
-
-    /// <summary>
-    /// Read the specified <paramref name="varid"/> as an array of uint32
-    /// into the pre-allocated <paramref name="ip"/> array.
-    /// </summary>
-    /// <param name="ncid">File and group ID</param>
-    /// <param name="varid">Variable ID</param>
-    /// <param name="ip">Pointer to where the data will be copied.</param>
-    /// <returns>
-    /// - NC_NOERR: No error.
-    /// - NC_ENOTVAR: Variable not found.
-    /// - NC_ERANGE: One or more of the values are out of range.
-    /// - NC_EINDEFINE: Operation not allowed in define mode.
-    /// - NC_EBADID: Bad ncid.
-    /// </returns>
-    [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
-    extern NCReturnCode nc_get_var_ulong([<In>] int ncid, 
-                                         [<In>] int varid,
-                                         [<Out>] uint32[] ip)
+                                        [<Out>] uint32[] ip)
 
     /// <summary>
     /// Read the specified <paramref name="varid"/> as an array of uint64
@@ -713,9 +627,9 @@ module internal NetCDF =
     /// - NC_EBADID: Bad ncid.
     /// </returns>
     [<DllImport("netcdf.dll", CallingConvention = CallingConvention.Cdecl)>]
-    extern NCReturnCode nc_get_var_ulonglong([<In>] int ncid, 
-                                             [<In>] int varid,
-                                             [<Out>] int64[] ip)
+    extern NCReturnCode nc_get_var_ulong([<In>] int ncid, 
+                                         [<In>] int varid,
+                                         [<Out>] uint64[] ip)
 
     /// <summary>
     /// Find the ID of a variable with the name <paramref name="name"/>.
