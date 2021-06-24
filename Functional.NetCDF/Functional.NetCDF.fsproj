@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="IRepository.fs" />
     <Compile Include="Native\NetCDF.fs" />
     <Compile Include="Managed\Common.fs" />
     <Compile Include="Managed\IFile.fs" />
