@@ -120,6 +120,11 @@ type internal File (ncId: NcID) =
             let returnCode = nc_get_var_int(localId, variableID.ToInt(), resultArray)
             toResult id returnCode resultArray
 
+        member this.RetrieveVariableValueLong (variableID: VarID) (valueSize: int) : Result<int64[], NCReturnCode> =
+            let resultArray = Array.zeroCreate valueSize
+            let returnCode = nc_get_var_long(localId, variableID.ToInt(), resultArray)
+            toResult id returnCode resultArray
+
     interface System.IDisposable with
         member this.Dispose () = 
             dispose ()
