@@ -5,6 +5,6 @@
 /// query the different aspects of a NetCDF file. 
 /// </summary>
 [<Interface>]
-type IRepository = 
+type public IRepository = 
     abstract member RetrieveVariable<'T> : name: string -> 'T
 
