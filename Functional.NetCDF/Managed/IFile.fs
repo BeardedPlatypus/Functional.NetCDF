@@ -246,3 +246,14 @@ type internal IFile =
     /// <paramref name="variableID"/> if succesful; otherwise the error code.
     /// </returns>
     abstract member RetrieveVariableValueChar : variableID: VarID -> valueSize: int -> Result<byte[], NCReturnCode>
+
+    /// <summary>
+    /// Retrieve the the string associated with <paramref name="variableID"/>
+    /// </summary>
+    /// <param name="variableID">The id of the variable.</param>
+    /// <param name="stringSize"> The size of the string.</param>
+    /// <returns>
+    /// An string containing the value associated with 
+    /// <paramref name="variableID"/> if succesful; otherwise the error code.
+    /// </returns>
+    abstract member RetrieveVariableValueString : variableID: VarID -> stringSize: int -> Result<string, NCReturnCode>
