@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Compile Include="IRepository.fs" />
+    <Compile Include="IQuery.fs" />
     <Compile Include="Native\NetCDF.fs" />
     <Compile Include="Managed\Common.fs" />
     <Compile Include="Managed\IFile.fs" />
