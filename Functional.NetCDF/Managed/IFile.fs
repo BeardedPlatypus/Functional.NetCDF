@@ -226,12 +226,23 @@ type internal IFile =
     abstract member RetrieveVariableValueInt : variableID: VarID -> valueSize: int -> Result<int32[], NCReturnCode>
 
     /// <summary>
-    /// Retrieve the the int32 values associated with <paramref name="variableID"/>
+    /// Retrieve the the int64 values associated with <paramref name="variableID"/>
     /// </summary>
     /// <param name="variableID">The id of the variable.</param>
     /// <param name="valueSize"> The number of values.</param>
     /// <returns>
-    /// An array containing the values as int32s associated with 
+    /// An array containing the values as int64s associated with 
     /// <paramref name="variableID"/> if succesful; otherwise the error code.
     /// </returns>
     abstract member RetrieveVariableValueLong : variableID: VarID -> valueSize: int -> Result<int64[], NCReturnCode>
+
+    /// <summary>
+    /// Retrieve the the byte values associated with <paramref name="variableID"/>
+    /// </summary>
+    /// <param name="variableID">The id of the variable.</param>
+    /// <param name="valueSize"> The number of values.</param>
+    /// <returns>
+    /// An array containing the values as byte associated with 
+    /// <paramref name="variableID"/> if succesful; otherwise the error code.
+    /// </returns>
+    abstract member RetrieveVariableValueChar : variableID: VarID -> valueSize: int -> Result<byte[], NCReturnCode>
