@@ -257,3 +257,14 @@ type internal IFile =
     /// <paramref name="variableID"/> if succesful; otherwise the error code.
     /// </returns>
     abstract member RetrieveVariableValueString : variableID: VarID -> stringSize: int -> Result<string, NCReturnCode>
+
+    /// <summary>
+    /// Retrieve the the uint32 values associated with <paramref name="variableID"/>
+    /// </summary>
+    /// <param name="variableID">The id of the variable.</param>
+    /// <param name="valueSize"> The number of values.</param>
+    /// <returns>
+    /// An array containing the values as uint32s associated with 
+    /// <paramref name="variableID"/> if succesful; otherwise the error code.
+    /// </returns>
+    abstract member RetrieveVariableValueUInt : variableID: VarID -> valueSize: int -> Result<uint32[], NCReturnCode>

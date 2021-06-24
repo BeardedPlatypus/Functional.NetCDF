@@ -135,6 +135,11 @@ type internal File (ncId: NcID) =
             let returnCode = nc_get_var_text(localId, variableID.ToInt(), resultString)
             toResult sb returnCode resultString
 
+        member this.RetrieveVariableValueUInt (variableID: VarID) (valueSize: int) : Result<uint32[], NCReturnCode> =
+            let resultArray = Array.zeroCreate valueSize
+            let returnCode = nc_get_var_uint(localId, variableID.ToInt(), resultArray)
+            toResult id returnCode resultArray
+
     interface System.IDisposable with
         member this.Dispose () = 
             dispose ()
