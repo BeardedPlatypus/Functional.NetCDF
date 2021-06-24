@@ -201,3 +201,43 @@ type File_Test () =
         let actualFirstValues: Result<double[], NCReturnCode> = 
             result |> Result.map (fun (values) -> Array.take (firstValues.Length) values)
         actualFirstValues |> should equal expectedFirstValues
+
+    [<Test>]
+    [<TestCase("mesh2d_edge_faces", 120, [| 1; 2; 1; 3; 2; 4; 2; 5; 3; 5 |])>]
+    [<TestCase("mesh2d_face_nodes", 100, [| 33; 1; 2; 3; 1; 4; 5; 2; 3; 2; 6 |])>]
+    member this.``RetrieveVariableValueInt should retrieve the correct data`` ((name: string), (expectedDataSize: int), (firstValues: int[])) =
+        use ncFile = openFile "./test-data/map.nc"
+
+        let getSize (dimIDs: Common.DimID[]): Result<int, NCReturnCode> =
+            let folder (accResult: Result<int, NCReturnCode>) (id: Common.DimID): Result<int, NCReturnCode> =
+                let sizeResult = ncFile.RetrieveDimensionValue id
+
+                match sizeResult, accResult with 
+                | Result.Ok size, Result.Ok acc -> Result.Ok (size * acc)
+                | _, Result.Error _ -> accResult
+                | Result.Error _, _ -> sizeResult
+
+            Array.fold folder (Result.Ok 1) dimIDs
+              
+
+        let result = 
+            ncFile.RetrieveVariableID name
+            |> Result.bind (fun (id: Common.VarID) -> (ncFile.RetrieveNumberDimensions id)
+                                                      |> Result.map (fun nDim -> (id, nDim)))
+            |> Result.bind (fun ((id:Common.VarID), (nDim: int)) -> (ncFile.RetrieveDimensionIDs id nDim)
+                                                                    |> Result.map (fun dimIDs -> (id, dimIDs)))
+            |> Result.bind (fun ((id:Common.VarID), (dimIDs: Common.DimID[])) -> getSize dimIDs
+                                                                                 |> Result.map (fun size -> (id, size)))
+            |> Result.bind (fun ((id:Common.VarID), (size: int)) -> ncFile.RetrieveVariableValueInt id size )
+
+        let expectedSize: Result<int, NCReturnCode> = 
+            Result.Ok expectedDataSize
+        let actualSize: Result<int, NCReturnCode> = 
+            result |> Result.map(fun da -> da.Length)
+        actualSize |> should equal expectedSize
+
+        let expectedFirstValues: Result<int[], NCReturnCode> = 
+            Result.Ok firstValues
+        let actualFirstValues: Result<int32[], NCReturnCode> = 
+            result |> Result.map (fun (values) -> Array.take (firstValues.Length) values)
+        actualFirstValues |> should equal expectedFirstValues
