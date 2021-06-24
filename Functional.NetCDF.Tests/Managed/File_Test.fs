@@ -152,7 +152,7 @@ type File_Test () =
     [<Test>]
     [<TestCase(3, 25)>]
     [<TestCase(5, 73)>]
-    member this.``nc_inq_dimlen should retrieve the correct dimension length`` ((dimID: int), (expectedDimLength: int)) =
+    member this.``RetrieveDimensionValue should retrieve the correct dimension length`` ((dimID: int), (expectedDimLength: int)) =
         use ncFile = openFile "./test-data/map.nc"
 
         let result = ncFile.RetrieveDimensionValue (Common.DimID dimID)
@@ -163,11 +163,10 @@ type File_Test () =
     [<Test>]
     [<TestCase("time", 73, [| 0.0; 1200.0; 2400.0; 3600.0; 4800.0; 6000.0; 7200.0; 8400.0; 9600.0; 10800.0 |])>]
     [<TestCase("mesh2d_face_x_bnd", 100, [| 0.0; 100.0; 100.0; 0.0; 100.0; 200.0; 200.0; 100.0; 0.0; 100.0 |])>]
-    member this.``nc_get_var_double should retrieve the correct data`` ((name: string), 
-                                                                        (expectedDataSize: int), 
-                                                                        (firstValues: double[])) =
+    member this.``RetrieveVariableValueDouble should retrieve the correct data`` ((name: string), 
+                                                                                  (expectedDataSize: int), 
+                                                                                  (firstValues: double[])) =
         use ncFile = openFile "./test-data/map.nc"
-
 
         let getSize (dimIDs: Common.DimID[]): Result<int, NCReturnCode> =
             let folder (accResult: Result<int, NCReturnCode>) (id: Common.DimID): Result<int, NCReturnCode> =
@@ -202,4 +201,3 @@ type File_Test () =
         let actualFirstValues: Result<double[], NCReturnCode> = 
             result |> Result.map (fun (values) -> Array.take (firstValues.Length) values)
         actualFirstValues |> should equal expectedFirstValues
-
