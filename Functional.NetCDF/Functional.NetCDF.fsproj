@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Compile Include="Native\NetCDF.fs" />
+    <Compile Include="Exceptions\ErrorCode.fs" />
     <Compile Include="Managed\Common.fs" />
     <Compile Include="Managed\IFile.fs" />
     <Compile Include="Managed\File.fs" />
