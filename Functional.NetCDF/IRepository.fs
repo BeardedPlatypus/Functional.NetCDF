@@ -6,5 +6,5 @@
 /// </summary>
 [<Interface>]
 type public IRepository = 
-    abstract member RetrieveVariable<'T> : name: string -> 'T
+    abstract member Placeholder : unit -> unit
 

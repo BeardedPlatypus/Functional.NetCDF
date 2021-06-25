@@ -9,13 +9,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="IRepository.fs" />
-    <Compile Include="IQuery.fs" />
     <Compile Include="Native\NetCDF.fs" />
     <Compile Include="Managed\Common.fs" />
     <Compile Include="Managed\IFile.fs" />
     <Compile Include="Managed\File.fs" />
     <Compile Include="Managed\NetCDF.fs" />
+    <Compile Include="IRepository.fs" />
+    <Compile Include="IQuery.fs" />
+    <Compile Include="Repository.fs" />
   </ItemGroup>
 
   <ItemGroup>
