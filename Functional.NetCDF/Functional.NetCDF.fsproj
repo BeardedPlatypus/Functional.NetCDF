@@ -17,6 +17,7 @@
     <Compile Include="Managed\File.fs" />
     <Compile Include="Managed\NetCDF.fs" />
     <Compile Include="VariableID.fs" />
+    <Compile Include="IVariableValue.fs" />
     <Compile Include="IRepository.fs" />
     <Compile Include="IQuery.fs" />
     <Compile Include="Repository.fs" />
