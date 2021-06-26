@@ -4,6 +4,10 @@ open BeardedPlatypus.Functional.NetCDF.Native.NetCDF
 open BeardedPlatypus.Functional.NetCDF.Exceptions
 open Common
 
+/// <summary>
+/// The <see cref="NetCDF"/> module provides convenient functions
+/// related to the NetCDF.
+/// </summary>
 module internal NetCDF =
     // TODO: extend open modes.
     let OpenExisting (path: string) : IFile =
