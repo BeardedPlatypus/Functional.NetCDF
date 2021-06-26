@@ -4,7 +4,7 @@
 /// <see cref="NetCDF"/> module defines the query method with which to query
 /// a NetCDF file.
 /// </summary>
-module public NetCDF =
+module public Service =
     /// <summary>
     /// Query the NetCDF file at <paramref name="path"/> with the specified
     /// <paramref name="query"/>.

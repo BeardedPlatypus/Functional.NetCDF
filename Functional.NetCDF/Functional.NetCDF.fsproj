@@ -23,7 +23,7 @@
     <Compile Include="IRepository.fs" />
     <Compile Include="IQuery.fs" />
     <Compile Include="Repository.fs" />
-    <Compile Include="NetCDF.fs" />
+    <Compile Include="Service.fs" />
   </ItemGroup>
 
   <ItemGroup>
