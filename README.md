@@ -6,19 +6,19 @@ A simple .NET NetCDF4 wrapper for windows written in F# targeting NETStandard 2.
 
 The current focus is on reading existing `.nc`files, and not so much creating new files.
 
-## Example code
+## Example code - Query Time
 
 The following subsections show the implementation of how to query the time 
 component from UGRID map file. More samples can be found in the Samples projects.
 
-### F#
-*The full code can be found [here]()*
+### F# Sample
+*The full code can be found [here](https://github.com/BeardedPlatypus/Functional.NetCDF/blob/main/Functional.NetCDF.Samples.FSharp/QueryTime.fs)*
 
 ```fsharp
 /// <summary>
 /// The <see cref="TimeQuery"/> implements the <see cref="IQuery"/> to obtain
-/// the Time component of a NetCDF UGRID file.
-/// It retrieves the start time and time steps.
+/// the Time component of a NetCDF UGRID file. It retrieves the start time and 
+/// time steps.
 /// </summary>
 type TimeQuery () =
     let interpretUnitsString (unitsString: string) : string * DateTime =
@@ -32,21 +32,25 @@ type TimeQuery () =
     interface IQuery with
         member this.Execute (repository: IRepository) : unit =
             
-            // Retrieve the id by finding the first component that defines a time component.
-            // In the case of UGRID files, this is a variable that has a standard_name attribute
-            // set to "time".
-            let id = (repository.RetrieveVariablesWithAttributeWithValue ("standard_name", "time")) |> Seq.head
+            // Retrieve the id by finding the first component that defines 
+	    // a time component. In the case of UGRID files, this is a variable
+	    // that has a standard_name attribute set to "time".
+            let id = 
+	        (repository.RetrieveVariablesWithAttributeWithValue ("standard_name", "time")) 
+		|> Seq.head
 
 
-            // The time variable should always have a "units" attribute, that defines a string 
-            // as "<time-quantity> since <date>", for example "seconds since 2021-06-14 00:00:00 +00:00"
+            // The time variable should always have a "units" attribute, that 
+	    // defines a string as "<time-quantity> since <date>", for example 
+	    // "seconds since 2021-06-14 00:00:00 +00:00"
             let unitsString = repository.RetrieveAttribute (id, "units")
             let (timeStep: string, startTime: DateTime) = interpretUnitsString unitsString
 
             this.StartTime <- startTime
 
-            // The "time" variable is a 1D sequence of doubles, we will convert this to time spans
-            // by using the <time-quantity> obtained from the units string.
+            // The "time" variable is a 1D sequence of doubles, we will convert
+	    // this to time spans by using the <time-quantity> obtained from the 
+	    // units string.
             let value : IVariableValue<double> = repository.RetrieveVariableValue<double> id
 
             let fTimeStep = 
@@ -86,8 +90,8 @@ type QueryTime () =
         query.TimeSteps |> should equal expectedTimeSteps
 ```
 
-### C#
-*The full code can be found [here]()*
+### C# Sample
+*The full code can be found [here](https://github.com/BeardedPlatypus/Functional.NetCDF/blob/main/Functional.NetCDF.Samples.CSharp/QueryTime.cs)*
 
 ```csharp
 /// <summary>
