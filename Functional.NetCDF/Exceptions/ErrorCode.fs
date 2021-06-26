@@ -35,23 +35,22 @@ module internal ErrorCode =
     /// <returns>
     /// The converted <see cref="ErrorCode"/> and error message if an error code; otherwise None.
     /// </returns>
-    let internal Convert (returnCode: NCReturnCode) : (ErrorCode * string) option = 
+    let internal convert (returnCode: NCReturnCode) : (ErrorCode * string) = 
         match returnCode with 
-        | NCReturnCode.NC_NOERR          -> None
-        | NCReturnCode.NC2_ERR           -> Some ( ErrorCode.Undefined, "Undefined error" )
-        | NCReturnCode.NC_EBADID         -> Some ( ErrorCode.BadID, "Not a netcdf id" )
-        | NCReturnCode.NC_EBADGRPID      -> Some ( ErrorCode.BadGroupID, "Bad group id" )    
-        | NCReturnCode.NC_EBADNAME       -> Some ( ErrorCode.BadName, "Attribute or variable name contains illegal characters" )     
-        | NCReturnCode.NC_EPERM          -> Some ( ErrorCode.WriteToReadOnly, "Write to read only" )     
-        | NCReturnCode.NC_ENFILE         -> Some ( ErrorCode.TooManyFilesOpen, "Too many netcdfs open" )     
-        | NCReturnCode.NC_EHDFERR        -> Some ( ErrorCode.HDF5Error, "Error at HDF5 layer" )    
-        | NCReturnCode.NC_EDIMMETA       -> Some ( ErrorCode.DimensionMetaDataError, "Problem with dimension metadata" )    
-        | NCReturnCode.NC_EATTMETA       -> Some ( ErrorCode.AttributeMetaDataError, "Problem with attribute metadata" )    
-        | NCReturnCode.NC_ENOMEM         -> Some ( ErrorCode.MallocFailure, "Memory allocation (malloc) failure" )     
-        | NCReturnCode.NC_ENOTVAR        -> Some ( ErrorCode.VariableNotFound , "Variable not found")
-        | NCReturnCode.NC_ENOTATT        -> Some ( ErrorCode.AttributeNotFound , "Attribute not found")     
-        | NCReturnCode.NC_ECHAR          -> Some ( ErrorCode.InvalidConversionTextNumbers , "Attempt to convert between text & numbers")     
-        | NCReturnCode.NC_ERANGE         -> Some ( ErrorCode.NotRepresantableMathResult , "Math result not representable")
-        | NCReturnCode.NC_EINVAL         -> Some ( ErrorCode.InvalidArgument , "Invalid Argument")     
-        | NCReturnCode.NC_EINDEFINE      -> Some ( ErrorCode.OperationNotAllowedInDefineMode , "Operation not allowed in define mode")
-        | _                              -> Some ( ErrorCode.Undefined, "Undefined error" )
+        | NCReturnCode.NC2_ERR           -> ( ErrorCode.Undefined, "Undefined error" )
+        | NCReturnCode.NC_EBADID         -> ( ErrorCode.BadID, "Not a netcdf id" )
+        | NCReturnCode.NC_EBADGRPID      -> ( ErrorCode.BadGroupID, "Bad group id" )    
+        | NCReturnCode.NC_EBADNAME       -> ( ErrorCode.BadName, "Attribute or variable name contains illegal characters" )     
+        | NCReturnCode.NC_EPERM          -> ( ErrorCode.WriteToReadOnly, "Write to read only" )     
+        | NCReturnCode.NC_ENFILE         -> ( ErrorCode.TooManyFilesOpen, "Too many netcdfs open" )     
+        | NCReturnCode.NC_EHDFERR        -> ( ErrorCode.HDF5Error, "Error at HDF5 layer" )    
+        | NCReturnCode.NC_EDIMMETA       -> ( ErrorCode.DimensionMetaDataError, "Problem with dimension metadata" )    
+        | NCReturnCode.NC_EATTMETA       -> ( ErrorCode.AttributeMetaDataError, "Problem with attribute metadata" )    
+        | NCReturnCode.NC_ENOMEM         -> ( ErrorCode.MallocFailure, "Memory allocation (malloc) failure" )     
+        | NCReturnCode.NC_ENOTVAR        -> ( ErrorCode.VariableNotFound , "Variable not found")
+        | NCReturnCode.NC_ENOTATT        -> ( ErrorCode.AttributeNotFound , "Attribute not found")     
+        | NCReturnCode.NC_ECHAR          -> ( ErrorCode.InvalidConversionTextNumbers , "Attempt to convert between text & numbers")     
+        | NCReturnCode.NC_ERANGE         -> ( ErrorCode.NotRepresantableMathResult , "Math result not representable")
+        | NCReturnCode.NC_EINVAL         -> ( ErrorCode.InvalidArgument , "Invalid Argument")     
+        | NCReturnCode.NC_EINDEFINE      -> ( ErrorCode.OperationNotAllowedInDefineMode , "Operation not allowed in define mode")
+        | _                              -> ( ErrorCode.Undefined, "Undefined error" )

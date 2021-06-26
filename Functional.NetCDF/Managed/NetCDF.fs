@@ -14,8 +14,10 @@ module internal NetCDF =
         let mutable id = -1
         let returnCode = nc_open(path, NCOpenMode.NoWrite, &id)
 
-        match ErrorCode.Convert returnCode with 
-        | Some error -> 
-            raise (NetCDFException error)
-        | None -> 
+        match returnCode with 
+        | NCReturnCode.NC_NOERR -> 
             new File(NcID id) :> IFile
+        | _ ->
+            ErrorCode.convert returnCode
+            |> NetCDFException
+            |> raise
