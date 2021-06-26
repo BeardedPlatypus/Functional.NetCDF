@@ -16,4 +16,10 @@
     <ProjectReference Include="..\Functional.NetCDF\Functional.NetCDF.fsproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="example-data\map.nc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
