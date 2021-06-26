@@ -19,7 +19,7 @@
     <None Include="example-data\map.nc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="UnitTest1.fs" />
+    <Compile Include="QueryTime.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
