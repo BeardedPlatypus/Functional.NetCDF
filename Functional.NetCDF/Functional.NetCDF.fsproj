@@ -12,6 +12,7 @@
     <Compile Include="Native\NetCDF.fs" />
     <Compile Include="Exceptions\ErrorCode.fs" />
     <Compile Include="Exceptions\NetCDFException.fs" />
+    <Compile Include="Exceptions\Exception.fs" />
     <Compile Include="Managed\Common.fs" />
     <Compile Include="Managed\IFile.fs" />
     <Compile Include="Managed\File.fs" />
