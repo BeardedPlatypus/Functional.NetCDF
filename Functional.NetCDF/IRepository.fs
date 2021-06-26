@@ -42,7 +42,8 @@ type public IRepository =
     /// <remarks>
     /// If an error occurs, false will be returned.
     /// </remarks>
-    abstract member TryRetrieveVariableValue<'T> : id: VariableID -> (bool * IVariableValue<'T>)
+    // TODO
+    // abstract member TryRetrieveVariableValue<'T> : id: VariableID -> (bool * IVariableValue<'T>)
 
     /// <summary>
     /// Try and retrieve the variable values associated with the variable name, <paramref cref="name"/>
@@ -56,7 +57,8 @@ type public IRepository =
     /// <remarks>
     /// If an error occurs, false will be returned.
     /// </remarks>
-    abstract member TryRetrieveVariableValue<'T> : name: string -> (bool * IVariableValue<'T>)
+    // TODO
+    // abstract member TryRetrieveVariableValue<'T> : name: string -> (bool * IVariableValue<'T>)
 
     /// <summary>
     /// Retrieve the dimension names associated with <paramref name="id"/>. 
@@ -132,7 +134,8 @@ type public IRepository =
     /// <remarks>
     /// If an error occurs, false will be returned.
     /// </remarks>
-    abstract member TryRetrieveAttribute<'T> : VariableID * string -> (bool * 'T)
+    // TODO
+    // abstract member TryRetrieveAttribute<'T> : VariableID * string -> (bool * 'T)
 
     /// <summary>
     /// Try and retrieve the attribute with the specified <paramref name="attributeName"/> from
@@ -148,7 +151,8 @@ type public IRepository =
     /// <remarks>
     /// If an error occurs, false will be return.
     /// </remarks>
-    abstract member TryRetrieveAttribute<'T> : string * string -> (bool * 'T)
+    // TODO
+    // abstract member TryRetrieveAttribute<'T> : string * string -> (bool * 'T)
 
     /// <summary>
     /// Retrieve all variables that have an attribute specified with 
