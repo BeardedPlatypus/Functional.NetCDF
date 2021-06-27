@@ -66,9 +66,6 @@ type internal Repository (file: Managed.IFile) =
         | Result.Error rc, _ -> Result.Error rc
         | _, Result.Error rc -> Result.Error rc
 
-    let retrieveDimensionNames (id: VariableID) : seq<string> =
-        Seq.empty
-
     let retrieveAttribute (attributeName: string) (id: VariableID) : 'T =
         match typeof<'T> with 
         | _ -> Exception.raiseDefault ()
@@ -82,13 +79,6 @@ type internal Repository (file: Managed.IFile) =
             retrieveVariableID name 
             |> retrieveVariableValue
             |> resolveResult
-
-        member this.RetrieveDimensionNames (id: VariableID) : seq<string> =
-            retrieveDimensionNames id
-
-        member this.RetrieveDimensionNames (name: string) : seq<string> =
-            retrieveVariableID name 
-            |> retrieveDimensionNames
 
         member this.RetrieveAttribute<'T> (id: VariableID, attributeName: string) : 'T =
             retrieveAttribute attributeName id

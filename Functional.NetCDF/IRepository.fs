@@ -73,7 +73,8 @@ type public IRepository =
     /// <remarks>
     /// The order corresponds with the <see cref="IvariableValue.Shape"/>. 
     /// </remarks>
-    abstract member RetrieveDimensionNames : id: VariableID -> seq<string>
+    // TODO
+    // abstract member RetrieveDimensionNames : id: VariableID -> seq<string>
 
     /// <summary>
     /// Retrieve the dimension names associated with <paramref name="name"/>. 
@@ -88,7 +89,8 @@ type public IRepository =
     /// <remarks>
     /// The order corresponds with the <see cref="IvariableValue.Shape"/>. 
     /// </remarks>
-    abstract member RetrieveDimensionNames : name: string -> seq<string>
+    // TODO
+    // abstract member RetrieveDimensionNames : name: string -> seq<string>
 
     /// <summary>
     /// Retrieve the attribute with the specified <paramref name="attributeName"/> from
