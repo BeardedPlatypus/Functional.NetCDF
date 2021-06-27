@@ -60,7 +60,7 @@ module internal Attribute =
 
         interface IRetriever<string> with 
             member this.Retrieve (file: IFile) (varID: Common.VarID) (attributeName: string) (valueSize: int) : Result<string[], NCReturnCode> =
-                (file.RetrieveAttributeValueText varID attributeName valueSize) |> (Result.map Array.singleton)
+                (file.RetrieveAttributeValueText varID attributeName (valueSize - 1)) |> (Result.map Array.singleton)
 
         interface IRetriever<uint32> with 
             member this.Retrieve (file: IFile) (varID: Common.VarID) (attributeName: string) (valueSize: int) : Result<uint32[], NCReturnCode> =

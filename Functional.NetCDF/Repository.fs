@@ -67,8 +67,11 @@ type internal Repository (file: Managed.IFile) =
         | _, Result.Error rc -> Result.Error rc
 
     let retrieveAttribute (attributeName: string) (id: VariableID) : Result<IAttributeValue<'T>, Native.NetCDF.NCReturnCode> =
-        match typeof<'T> with 
-        | _ -> Exception.raiseDefault ()
+        let size = file.RetrieveAttributeInformation id.ID attributeName
+                   |> Result.map (fun info -> info.Size)
+        let values = size |> Result.bind (fun (s: int) -> Managed.Attribute.Value<'T>.Retrieve file id.ID attributeName s )
+
+        values |> Result.map (fun values -> AttributeValue(values) :> IAttributeValue<'T>)
         
 
     interface IRepository with
