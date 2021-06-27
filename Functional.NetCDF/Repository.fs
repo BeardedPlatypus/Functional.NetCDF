@@ -16,6 +16,21 @@ type internal Repository (file: Managed.IFile) =
             let errorInfo = ec |> ErrorCode.convert 
             raise (NetCDFException errorInfo)
 
+    let flattenResult (resArray: Result<'T, Native.NetCDF.NCReturnCode>[]) : Result<'T[], Native.NetCDF.NCReturnCode> =
+        let folder ((i: int), (acc: Result<'T[], Native.NetCDF.NCReturnCode>)) (v: Result<'T, Native.NetCDF.NCReturnCode>) =
+            ( i + 1,
+              match (acc, v) with
+              | Result.Ok actuallAcc, Result.Ok actualV -> 
+                  actuallAcc.[i] <- actualV
+                  Result.Ok actuallAcc
+              | Result.Error _, _  -> 
+                  acc
+              | _, Result.Error rc -> Result.Error rc
+            )
+
+        let (_, flattened) = Array.fold folder (0, Result.Ok (Array.zeroCreate resArray.Length)) resArray
+        flattened
+
     let idDict = Dictionary<string, VariableID>()
 
     let retrieveVariableFromFile (variableName: string) : VariableID =
@@ -31,9 +46,25 @@ type internal Repository (file: Managed.IFile) =
         if (hasValue) then value 
         else retrieveVariableFromFile variableName
 
-    let retrieveVariableValue (id: VariableID) : IVariableValue<'T> =
-        match typeof<'T> with 
-        | _ -> Exception.raiseDefault ()
+    let retrieveVariableShape (varID: VariableID) : Result<int[], Native.NetCDF.NCReturnCode> =
+        let dimIDs = (file.RetrieveNumberDimensions varID.ID)
+                     |> Result.bind (fun dimSize -> file.RetrieveDimensionIDs varID.ID dimSize)
+
+        let toSize (ids: Managed.Common.DimID[]) : Result<int[], Native.NetCDF.NCReturnCode> =
+            Array.map (fun i -> file.RetrieveDimensionValue i) ids
+            |> flattenResult
+
+        dimIDs |>Result.bind toSize
+
+    let retrieveVariableValue (id: VariableID) : Result<IVariableValue<'T>, Native.NetCDF.NCReturnCode> =
+        let shape = retrieveVariableShape id
+        let size = shape |> Result.map (Array.fold (*) 1) |> resolveResult
+        let values = Managed.Variable.Value.Retrieve file id.ID size
+
+        match (shape, values) with 
+        | Result.Ok s, Result.Ok v -> Result.Ok (VariableValue(v, s) :> IVariableValue<'T>)
+        | Result.Error rc, _ -> Result.Error rc
+        | _, Result.Error rc -> Result.Error rc
 
     let retrieveDimensionNames (id: VariableID) : seq<string> =
         Seq.empty
@@ -44,12 +75,13 @@ type internal Repository (file: Managed.IFile) =
         
 
     interface IRepository with
-        member this.RetrieveVariableValue<'T> (id: VariableID) : IVariableValue<'T> =
-            retrieveVariableValue id
-
-        member this.RetrieveVariableValue<'T> (name: string) : IVariableValue<'T> =
+        member this.RetrieveVariableValue (id: VariableID) : IVariableValue<'T> =
+            retrieveVariableValue id |> resolveResult
+ 
+        member this.RetrieveVariableValue (name: string) : IVariableValue<'T> =
             retrieveVariableID name 
             |> retrieveVariableValue
+            |> resolveResult
 
         member this.RetrieveDimensionNames (id: VariableID) : seq<string> =
             retrieveDimensionNames id
