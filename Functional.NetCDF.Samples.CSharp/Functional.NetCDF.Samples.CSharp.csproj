@@ -22,4 +22,8 @@
     </None>
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="xcopy $(SolutionDir)Functional.NetCDF\Native\Lib\*.dll $(OutDir) /Y /C /Q" />
+  </Target>
+
 </Project>
