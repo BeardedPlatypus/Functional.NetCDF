@@ -8,10 +8,6 @@
 /// The values are stored as a single ordered sequence based on the order of 
 /// dimensions defined in the shame.
 /// </summary>
-/// <remarks>
-/// The names of the dimension can be queried separately through the 
-/// <see cref="IRepository"/>.
-/// </remarks>
 [<Interface>]
 type public IVariableValue<'T> = 
     /// <summary>
