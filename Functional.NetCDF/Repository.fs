@@ -16,6 +16,11 @@ type internal Repository (file: Managed.IFile) =
             let errorInfo = ec |> ErrorCode.convert 
             raise (NetCDFException errorInfo)
 
+    let isOk (res: Result<_, _>): bool = 
+        match res with 
+        | Result.Ok _    -> true
+        | Result.Error _ -> false
+
     let flattenResult (resArray: Result<'T, Native.NetCDF.NCReturnCode>[]) : Result<'T[], Native.NetCDF.NCReturnCode> =
         let folder ((i: int), (acc: Result<'T[], Native.NetCDF.NCReturnCode>)) (v: Result<'T, Native.NetCDF.NCReturnCode>) =
             ( i + 1,
@@ -72,6 +77,11 @@ type internal Repository (file: Managed.IFile) =
         let values = size |> Result.bind (fun (s: int) -> Managed.Attribute.Value<'T>.Retrieve file id.ID attributeName s )
 
         values |> Result.map (fun values -> AttributeValue(values) :> IAttributeValue<'T>)
+
+    let retrieveVariables (filter: VariableID -> bool): Result<seq<VariableID>, Native.NetCDF.NCReturnCode> =
+        file.RetrieveNVariables () 
+        |> Result.map (fun (size: int) -> seq { for i in 0 .. (size - 1) do yield VariableID(Managed.Common.VarID i) })
+        |> Result.map (Seq.filter filter)
         
 
     interface IRepository with
@@ -93,8 +103,17 @@ type internal Repository (file: Managed.IFile) =
             |> resolveResult
 
         member this.RetrieveVariablesWithAttribute (attributeName: string) : seq<VariableID> =
-            Seq.empty
+            let filter (id: VariableID) = (retrieveAttribute attributeName id) |> isOk
+            retrieveVariables filter
+            |> resolveResult
 
-        member this.RetrieveVariablesWithAttributeWithValue<'T> (attributeName: string, attributeValue: 'T) : seq<VariableID> =
-            Seq.empty
+        member this.RetrieveVariablesWithAttributeWithValue<'T when 'T : equality> (attributeName: string, attributeValue: 'T) : seq<VariableID> =
+            let filter (id: VariableID) = 
+                let attribute = retrieveAttribute attributeName id
+                match attribute with 
+                | Result.Ok v when (v.Values |> Seq.head) = attributeValue -> true
+                | _ -> false
+
+            retrieveVariables filter
+            |> resolveResult
 
