@@ -181,5 +181,5 @@ type public IRepository =
     /// <exception cref="Exceptions.NetCDFException"> 
     /// Thrown when any exception occurs during retrieving the variable values.
     /// </exception>
-    abstract member RetrieveVariablesWithAttributeWithValue<'T> : string * 'T -> seq<VariableID>
+    abstract member RetrieveVariablesWithAttributeWithValue<'T when 'T : equality> : string * 'T -> seq<VariableID> 
 
