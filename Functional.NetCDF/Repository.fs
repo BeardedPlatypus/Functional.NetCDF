@@ -66,7 +66,7 @@ type internal Repository (file: Managed.IFile) =
         | Result.Error rc, _ -> Result.Error rc
         | _, Result.Error rc -> Result.Error rc
 
-    let retrieveAttribute (attributeName: string) (id: VariableID) : 'T =
+    let retrieveAttribute (attributeName: string) (id: VariableID) : Result<IAttributeValue<'T>, Native.NetCDF.NCReturnCode> =
         match typeof<'T> with 
         | _ -> Exception.raiseDefault ()
         
@@ -80,12 +80,14 @@ type internal Repository (file: Managed.IFile) =
             |> retrieveVariableValue
             |> resolveResult
 
-        member this.RetrieveAttribute<'T> (id: VariableID, attributeName: string) : 'T =
+        member this.RetrieveVariableAttribute<'T> (id: VariableID, attributeName: string) : IAttributeValue<'T> =
             retrieveAttribute attributeName id
+            |> resolveResult
         
-        member this.RetrieveAttribute<'T> (variableName: string, attributeName: string) : 'T =
+        member this.RetrieveVariableAttribute<'T> (variableName: string, attributeName: string) : IAttributeValue<'T> =
             retrieveVariableID variableName
             |> retrieveAttribute attributeName
+            |> resolveResult
 
         member this.RetrieveVariablesWithAttribute (attributeName: string) : seq<VariableID> =
             Seq.empty

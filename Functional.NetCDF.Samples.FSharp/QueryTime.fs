@@ -30,8 +30,8 @@ type TimeQuery () =
 
             // The time variable should always have a "units" attribute, that defines a string 
             // as "<time-quantity> since <date>", for example "seconds since 2021-06-14 00:00:00 +00:00"
-            let unitsString = repository.RetrieveAttribute (id, "units")
-            let (timeStep: string, startTime: DateTime) = interpretUnitsString unitsString
+            let unitsString = repository.RetrieveVariableAttribute (id, "units")
+            let (timeStep: string, startTime: DateTime) = interpretUnitsString (unitsString.Values |> Seq.head)
 
             this.StartTime <- startTime
 

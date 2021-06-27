@@ -39,8 +39,8 @@ namespace Functional.NetCDF.Samples.CSharp
 
                 // The time variable should always have a "units" attribute, that defines a string 
                 // as "<time-quantity> since <date>", for example "seconds since 2021-06-14 00:00:00 +00:00"
-                var units = repository.RetrieveAttribute<string>(id, "units");
-                InterpretUnitsString(units, out var timeStep, out var startTime);
+                var units = repository.RetrieveVariableAttribute<string>(id, "units");
+                InterpretUnitsString(units.Values.First(), out var timeStep, out var startTime);
                 StartTime = startTime;
 
                 // The "time" variable is a 1D sequence of doubles, we will convert this to time spans

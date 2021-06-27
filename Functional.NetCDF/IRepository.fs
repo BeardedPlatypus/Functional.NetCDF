@@ -105,7 +105,7 @@ type public IRepository =
     /// <exception cref="Exceptions.NetCDFException"> 
     /// Thrown when any exception occurs during retrieving the variable values.
     /// </exception>
-    abstract member RetrieveAttribute<'T> : VariableID * string -> 'T
+    abstract member RetrieveVariableAttribute<'T> : VariableID * string -> IAttributeValue<'T>
 
     /// <summary>
     /// Retrieve the attribute with the specified <paramref name="attributeName"/> from
@@ -120,7 +120,7 @@ type public IRepository =
     /// <exception cref="Exceptions.NetCDFException"> 
     /// Thrown when any exception occurs during retrieving the variable values.
     /// </exception>
-    abstract member RetrieveAttribute<'T> : string * string -> 'T
+    abstract member RetrieveVariableAttribute<'T> : string * string -> IAttributeValue<'T>
 
     /// <summary>
     /// Try and retrieve the attribute with the specified <paramref name="attributeName"/> from
