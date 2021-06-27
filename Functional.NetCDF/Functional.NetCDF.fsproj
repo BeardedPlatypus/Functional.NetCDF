@@ -22,6 +22,8 @@
     <Compile Include="VariableID.fs" />
     <Compile Include="IVariableValue.fs" />
     <Compile Include="VariableValue.fs" />
+    <Compile Include="IAttributeValue.fs" />
+    <Compile Include="AttributeValue.fs" />
     <Compile Include="IRepository.fs" />
     <Compile Include="IQuery.fs" />
     <Compile Include="Repository.fs" />
