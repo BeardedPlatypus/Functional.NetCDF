@@ -60,7 +60,7 @@ namespace Functional.NetCDF.Samples.CSharp
                 // We assume the string is correctly formatted. In production code we might want to add
                 // some more validation here.
                 o = parts[0];
-                startTime = DateTime.Parse(parts[0]);
+                startTime = DateTime.Parse(parts[1]);
             }
 
             private static Func<double, TimeSpan> GetToTimeStep(string timeStepSize) =>
@@ -81,7 +81,7 @@ namespace Functional.NetCDF.Samples.CSharp
             Service.Query("./example-data/map.nc", query);
 
             // Validate the results
-            var expectedStartTime = DateTime.Parse("2021-06-14 00:00:00 +00:00");
+            var expectedStartTime = DateTime.Parse("2001-01-01 00:00:00 +00:00");
             Assert.That(query.StartTime, Is.EqualTo(expectedStartTime));
 
             var expectedTimeSteps =

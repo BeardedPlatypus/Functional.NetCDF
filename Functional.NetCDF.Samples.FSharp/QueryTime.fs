@@ -68,7 +68,7 @@ type QueryTime () =
         Service.Query ("./example-data/map.nc", query :> IQuery)
 
         // Validate the results
-        let expectedStartTime = DateTime.Parse "2021-06-14 00:00:00 +00:00"
+        let expectedStartTime = DateTime.Parse "2001-01-01 00:00:00 +00:00"
         query.StartTime |> should equal expectedStartTime
 
         let expectedTimeSteps : TimeSpan list = 
