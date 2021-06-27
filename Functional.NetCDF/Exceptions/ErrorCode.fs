@@ -19,7 +19,7 @@ type public ErrorCode =
     | VariableNotFound                = 10 // NC_ENOTVAR
     | AttributeNotFound               = 11 // NC_ENOTATT
     | InvalidConversionTextNumbers    = 12 // NC_ECHAR
-    | NotRepresantableMathResult      = 13 // NC_ERANGE
+    | NotRepresentableMathResult      = 13 // NC_ERANGE
     | InvalidArgument                 = 14 // NC_EINVAL
     | OperationNotAllowedInDefineMode = 15 // NC_EINDEFINE
 
@@ -50,7 +50,7 @@ module internal ErrorCode =
         | NCReturnCode.NC_ENOTVAR        -> ( ErrorCode.VariableNotFound , "Variable not found")
         | NCReturnCode.NC_ENOTATT        -> ( ErrorCode.AttributeNotFound , "Attribute not found")     
         | NCReturnCode.NC_ECHAR          -> ( ErrorCode.InvalidConversionTextNumbers , "Attempt to convert between text & numbers")     
-        | NCReturnCode.NC_ERANGE         -> ( ErrorCode.NotRepresantableMathResult , "Math result not representable")
+        | NCReturnCode.NC_ERANGE         -> ( ErrorCode.NotRepresentableMathResult , "Math result not representable")
         | NCReturnCode.NC_EINVAL         -> ( ErrorCode.InvalidArgument , "Invalid Argument")     
         | NCReturnCode.NC_EINDEFINE      -> ( ErrorCode.OperationNotAllowedInDefineMode , "Operation not allowed in define mode")
         | _                              -> ( ErrorCode.Undefined, "Undefined error" )
