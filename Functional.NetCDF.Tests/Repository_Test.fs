@@ -70,7 +70,12 @@ type Repository_Test () =
         (Seq.take 10 result.Values) |> should equal expectedTimeSteps
 
     static member GetRetrieveAttributeValueString () : seq<TestCaseData> = 
-        seq { TestCaseData("mesh2d", "cf_role", seq { "mesh_topology" }) }
+        seq { TestCaseData("mesh2d", "cf_role", seq { "mesh_topology" }) 
+              TestCaseData("mesh2d", "face_dimension", seq { "mesh2d_nFaces" })
+              TestCaseData("mesh2d_ucmag", "mesh", seq { "mesh2d" })
+              TestCaseData("time", "standard_name", seq { "time" })
+              TestCaseData("time", "units", seq { "seconds since 2001-01-01 00:00:00 +00:00" })
+            }
 
     [<Test>]
     [<TestCaseSource("GetRetrieveAttributeValueString")>]
@@ -88,7 +93,9 @@ type Repository_Test () =
         result.Values |> should equal expectedValue
         
     static member GetRetrieveAttributeValueInt () : seq<TestCaseData> = 
-        seq { TestCaseData("mesh2d", "topology_dimension", seq { 2 }) }
+        seq { TestCaseData("mesh2d", "topology_dimension", seq { 2 }) 
+              TestCaseData("projected_coordinate_system", "epsg", seq { 0 })
+            }
 
     [<Test>]
     [<TestCaseSource("GetRetrieveAttributeValueInt")>]
@@ -106,7 +113,12 @@ type Repository_Test () =
         result.Values |> should equal expectedValue
         
     static member GetRetrieveAttributeValueDouble () : seq<TestCaseData> = 
-        seq { TestCaseData("mesh2d_czu", "_FillValue", seq { -999.0 }) }
+        seq { TestCaseData("mesh2d_czu", "_FillValue", seq { -999.0 }) 
+              TestCaseData("projected_coordinate_system", "longitude_of_prime_meridian", seq { 0.0 })
+              TestCaseData("projected_coordinate_system", "semi_major_axis", seq { 6378137.0 })
+              TestCaseData("projected_coordinate_system", "semi_minor_axis", seq { 6356752.314245 })
+              TestCaseData("projected_coordinate_system", "inverse_flattening", seq { 298.257223563 })
+            }
 
     [<Test>]
     [<TestCaseSource("GetRetrieveAttributeValueDouble")>]
