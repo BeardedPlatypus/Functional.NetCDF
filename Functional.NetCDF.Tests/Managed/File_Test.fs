@@ -1,4 +1,4 @@
-﻿namespace BeardedPlatypus.Functional.NetCDF.Managed.Tests
+﻿namespace BeardedPlatypus.Functional.NetCDF.Tests.Managed
 
 open NUnit.Framework
 open FsUnit
