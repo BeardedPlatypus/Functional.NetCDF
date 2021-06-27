@@ -15,11 +15,13 @@ type Repository_Test () =
         let repo : IRepository = Repository(file) :> IRepository
 
         // Call
-        let result = repo.RetrieveVariableValue (VariableID(Common.VarID 17))
+        let result = repo.RetrieveVariableValue<double> (VariableID(Common.VarID 17))
 
         // Assert
+        result.Shape |> should equal (seq { 73 })
+
         let expectedTimeSteps : seq<double> = seq { for i in 0 .. 72 -> (double) i * 1200.0 }
-        result |> should equal expectedTimeSteps
+        result.Values |> should equal expectedTimeSteps
         
 
     [<Test>]
@@ -29,9 +31,11 @@ type Repository_Test () =
         let repo : IRepository = Repository(file) :> IRepository
 
         // Call
-        let result = repo.RetrieveVariableValue "time"
+        let result = repo.RetrieveVariableValue<double> "time"
 
         // Assert
+        result.Shape |> should equal (seq { 73 })
+
         let expectedTimeSteps : seq<double> = seq { for i in 0 .. 72 -> (double) i * 1200.0 }
-        result |> should equal expectedTimeSteps
+        result.Values |> should equal expectedTimeSteps
 
