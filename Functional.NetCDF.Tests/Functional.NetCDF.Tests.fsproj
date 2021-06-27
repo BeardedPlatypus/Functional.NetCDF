@@ -23,6 +23,7 @@
     <Compile Include="Exceptions\Exception_Test.fs" />
     <Compile Include="Native\NetCDF_Test.fs" />
     <Compile Include="Managed\File_Test.fs" />
+    <Compile Include="Repository_Test.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
