@@ -34,7 +34,7 @@ type public IRepository =
     /// Retrieve the attribute with the specified <paramref name="attributeName"/> from
     /// the variable associated with the specified <paramref name="variableID"/>.
     /// </summary>
-    /// <param name="VariableID">The variable id</param>
+    /// <param name="variableID">The variable id</param>
     /// <param name="attributeName">The attribute name</param>
     /// <returns>
     /// The attribute value associated with <paramref name="attributeName"/> from the 
@@ -49,7 +49,7 @@ type public IRepository =
     /// Retrieve the attribute with the specified <paramref name="attributeName"/> from
     /// the variable associated with the specified <paramref name="variableName"/>.
     /// </summary>
-    /// <param name="VariableName">The variable name</param>
+    /// <param name="variableName">The variable name</param>
     /// <param name="attributeName">The attribute name</param>
     /// <returns>
     /// The attribute value associated with <paramref name="attributeName"/> from the 
@@ -85,5 +85,5 @@ type public IRepository =
     /// <exception cref="Exceptions.NetCDFException"> 
     /// Thrown when any exception occurs during retrieving the variable values.
     /// </exception>
-    abstract member RetrieveVariablesWithAttributeWithValue<'T when 'T : equality> : string * 'T -> seq<VariableID> 
+    abstract member RetrieveVariablesWithAttributeWithValue<'T when 'T : equality> : attributeName: string * attributeValue: 'T -> seq<VariableID> 
 
