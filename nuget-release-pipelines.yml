@@ -1,0 +1,24 @@
+trigger:
+  branches:
+    include:
+      - refs/tags/release_*
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: DownloadPipelineArtifact@2
+  inputs:
+    buildType: 'specific'
+    project: 'f40dfb5b-e275-4435-b647-9e634bcf8acf'
+    definition: '32'
+    buildVersionToDownload: 'latest'
+    artifactName: 'Job'
+    targetPath: '$(Pipeline.Workspace)'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;!$(Pipeline.Workspace)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'f40dfb5b-e275-4435-b647-9e634bcf8acf/967db046-c2b0-4806-9b73-cb57cb59d916'
