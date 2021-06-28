@@ -39,9 +39,8 @@ type TimeQuery () =
             let id = (repository.RetrieveVariablesWithAttributeWithValue ("standard_name", "time")) 
                      |> Seq.head
 
-
             // The time variable should always have a "units" attribute, that defines a string 
-            // as "<time-quantity> since <date>", for example "seconds since 2021-06-14 00:00:00 +00:00"
+            // as "<time-quantity> since <date>", for example "seconds since 2001-01-01 00:00:00 +00:00"
             let unitsString = repository.RetrieveVariableAttribute (id, "units")
             let (timeStep: string, startTime: DateTime) = 
                 interpretUnitsString (unitsString.Values |> Seq.head)
@@ -113,7 +112,7 @@ public class TimeQuery : IQuery
                            .FirstOrDefault();
 
         // The time variable should always have a "units" attribute, that defines a string 
-        // as "<time-quantity> since <date>", for example "seconds since 2021-06-14 00:00:00 +00:00"
+        // as "<time-quantity> since <date>", for example "seconds since 2001-01-01 00:00:00 +00:00"
         var units = repository.RetrieveVariableAttribute<string>(id, "units");
         InterpretUnitsString(units.Values.First(), out var timeStep, out var startTime);
         StartTime = startTime;
