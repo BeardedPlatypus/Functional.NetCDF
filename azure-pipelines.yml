@@ -38,7 +38,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(Pipeline.Workspace)\Functional.NetCDF\bin\$(buildConfiguration)'
+    SourceFolder: '$(Pipeline.Workspace)\**\Functional.NetCDF\bin\$(buildConfiguration)'
     Contents: '*.nupkg'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
