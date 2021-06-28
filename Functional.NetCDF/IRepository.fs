@@ -43,7 +43,7 @@ type public IRepository =
     /// <exception cref="Exceptions.NetCDFException"> 
     /// Thrown when any exception occurs during retrieving the variable values.
     /// </exception>
-    abstract member RetrieveVariableAttribute<'T> : VariableID * string -> IAttributeValue<'T>
+    abstract member RetrieveVariableAttribute<'T> : variableID: VariableID * attributeName: string -> IAttributeValue<'T>
 
     /// <summary>
     /// Retrieve the attribute with the specified <paramref name="attributeName"/> from
@@ -58,7 +58,7 @@ type public IRepository =
     /// <exception cref="Exceptions.NetCDFException"> 
     /// Thrown when any exception occurs during retrieving the variable values.
     /// </exception>
-    abstract member RetrieveVariableAttribute<'T> : string * string -> IAttributeValue<'T>
+    abstract member RetrieveVariableAttribute<'T> : variableName: string * attributeName: string -> IAttributeValue<'T>
 
     /// <summary>
     /// Retrieve all variables that have an attribute specified with 
@@ -78,7 +78,7 @@ type public IRepository =
     /// <paramref name="attributeName"/> which has the value equal to <paramref name="attributeValue"/>.
     /// </summary>
     /// <param name="attributeName">The name of the attribute that should be associated with the variable</param>
-    /// <param name="attributeValue"The value that variables should contain in the specified attribute name </param>
+    /// <param name="attributeValue">The value that variables should contain in the specified attribute name </param>
     /// <returns>
     /// The sequence of VariableIDs which have the specified <pararmrefm name="attributeName"/>
     /// </returns>
