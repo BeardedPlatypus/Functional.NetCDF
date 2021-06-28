@@ -18,12 +18,12 @@ component from UGRID map file. More samples can be found in the Samples projects
 ```fsharp
 /// <summary>
 /// The <see cref="TimeQuery"/> implements the <see cref="IQuery"/> to obtain
-/// the Time component of a NetCDF UGRID file. It retrieves the start time and 
-/// time steps.
+/// the Time component of a NetCDF UGRID file.
+/// It retrieves the start time and time steps.
 /// </summary>
 type TimeQuery () =
     let interpretUnitsString (unitsString: string) : string * DateTime =
-        match unitsString.Split [| " since " |] StringSplitOptions.RemoveEmptyEntries
+        match unitsString.Split([| " since " |], StringSplitOptions.RemoveEmptyEntries) with
         | [| ts; dt |] -> (ts, DateTime.Parse dt)
         | _ -> failwith "Invalid units string"
 
@@ -33,25 +33,23 @@ type TimeQuery () =
     interface IQuery with
         member this.Execute (repository: IRepository) : unit =
             
-            // Retrieve the id by finding the first component that defines 
-	    // a time component. In the case of UGRID files, this is a variable
-	    // that has a standard_name attribute set to "time".
-            let id = 
-	        (repository.RetrieveVariablesWithAttributeWithValue ("standard_name", "time")) 
-		|> Seq.head
+            // Retrieve the id by finding the first component that defines a time component.
+            // In the case of UGRID files, this is a variable that has a standard_name attribute
+            // set to "time".
+            let id = (repository.RetrieveVariablesWithAttributeWithValue ("standard_name", "time")) 
+                     |> Seq.head
 
 
-            // The time variable should always have a "units" attribute, that 
-	    // defines a string as "<time-quantity> since <date>", for example 
-	    // "seconds since 2021-06-14 00:00:00 +00:00"
-            let unitsString = repository.RetrieveAttribute (id, "units")
-            let (timeStep: string, startTime: DateTime) = interpretUnitsString unitsString
+            // The time variable should always have a "units" attribute, that defines a string 
+            // as "<time-quantity> since <date>", for example "seconds since 2021-06-14 00:00:00 +00:00"
+            let unitsString = repository.RetrieveVariableAttribute (id, "units")
+            let (timeStep: string, startTime: DateTime) = 
+                interpretUnitsString (unitsString.Values |> Seq.head)
 
             this.StartTime <- startTime
 
-            // The "time" variable is a 1D sequence of doubles, we will convert
-	    // this to time spans by using the <time-quantity> obtained from the 
-	    // units string.
+            // The "time" variable is a 1D sequence of doubles, we will convert this to time spans
+            // by using the <time-quantity> obtained from the units string.
             let value : IVariableValue<double> = repository.RetrieveVariableValue<double> id
 
             let fTimeStep = 
@@ -83,7 +81,7 @@ type QueryTime () =
         Service.Query ("./example-data/map.nc", query :> IQuery)
 
         // Validate the results
-        let expectedStartTime = DateTime.Parse "2021-06-14 00:00:00 +00:00"
+        let expectedStartTime = DateTime.Parse "2001-01-01 00:00:00 +00:00"
         query.StartTime |> should equal expectedStartTime
 
         let expectedTimeSteps : TimeSpan list = 
@@ -116,8 +114,8 @@ public class TimeQuery : IQuery
 
         // The time variable should always have a "units" attribute, that defines a string 
         // as "<time-quantity> since <date>", for example "seconds since 2021-06-14 00:00:00 +00:00"
-        var units = repository.RetrieveAttribute<string>(id, "units");
-        InterpretUnitsString(units, out var timeStep, out var startTime);
+        var units = repository.RetrieveVariableAttribute<string>(id, "units");
+        InterpretUnitsString(units.Values.First(), out var timeStep, out var startTime);
         StartTime = startTime;
 
         // The "time" variable is a 1D sequence of doubles, we will convert this to time spans
@@ -137,7 +135,7 @@ public class TimeQuery : IQuery
         // We assume the string is correctly formatted. In production code we might want to add
         // some more validation here.
         o = parts[0];
-        startTime = DateTime.Parse(parts[0]);
+        startTime = DateTime.Parse(parts[1]);
     }
 
     private static Func<double, TimeSpan> GetToTimeStep(string timeStepSize) =>
@@ -158,7 +156,7 @@ public void QueryTime_Sample()
     Service.Query("./example-data/map.nc", query);
 
     // Validate the results
-    var expectedStartTime = DateTime.Parse("2021-06-14 00:00:00 +00:00");
+    var expectedStartTime = DateTime.Parse("2001-01-01 00:00:00 +00:00");
     Assert.That(query.StartTime, Is.EqualTo(expectedStartTime));
 
     var expectedTimeSteps =
