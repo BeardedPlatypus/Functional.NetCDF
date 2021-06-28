@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>0.1.0</Version>
+    <Company />
+    <Authors>Maarten Tegelaers</Authors>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/BeardedPlatypus/Functional.NetCDF</RepositoryUrl>
+    <PackageTags>NetCDF</PackageTags>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,7 +44,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Native\Lib\" />
+    <None Include="..\LICENSE.md" Pack="True" PackagePath="" />
+    <None Include="Native\Lib\concrt140.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\hdf.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\hdf5.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\hdf5_cpp.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\hdf5_hl.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\hdf5_hl_cpp.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\hdf5_tools.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\jpeg.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\libcurl.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\mfhdf.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\msvcp140.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\netcdf.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\vcruntime140.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\xdr.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
+    <None Include="Native\Lib\zlib1.dll" Pack="True" PackagePath="runtimes/win-x64/native" />
   </ItemGroup>
 
 </Project>
