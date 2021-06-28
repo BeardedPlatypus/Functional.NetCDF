@@ -1,0 +1,15 @@
+{
+    "name": "com.beardedplatypus.functional.netcdf",
+    "version": "0.1.0",
+    "displayName": "Functional.NetCDF",
+    "description": "An opinonated NetCDF4 wrapper for .NET on windows.",
+    "changelogUrl": "https://github.com/BeardedPlatypus/Functional.NetCDF/blob/main/CHANGELOG.md",
+    "licensesUrl": "https://github.com/BeardedPlatypus/Functional.NetCDF/blob/main/LICENSE.md",
+    "dependencies": {
+        "com.beardedplatypus.fsharp.core": "5.0.1"
+     },
+    "author": {
+      "name": "Maarten Tegelaers",
+      "url": "https://github.com/BeardedPlatypus"
+    }
+  }
