@@ -12,8 +12,7 @@ steps:
     buildType: 'specific'
     project: 'f40dfb5b-e275-4435-b647-9e634bcf8acf'
     definition: '32'
-    buildVersionToDownload: 'latestFromBranch'
-    branchName: 'refs/tags/release_*'
+    buildVersionToDownload: 'latest'
     artifactName: 'Job'
     targetPath: '$(Pipeline.Workspace)'
 
