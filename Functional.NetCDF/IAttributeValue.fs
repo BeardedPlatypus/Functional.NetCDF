@@ -1,7 +1,7 @@
 ﻿namespace BeardedPlatypus.Functional.NetCDF
 
 /// <summary>
-/// <see cref="IAttributeValue"> defines the result of an attribute value query.
+/// <see cref="IAttributeValue"/> defines the result of an attribute value query.
 /// </summary>
 [<Interface>]
 type public IAttributeValue<'T> = 

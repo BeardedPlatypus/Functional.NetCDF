@@ -683,7 +683,7 @@ module internal NetCDF =
     /// Retrieve the length of a dimension
     /// </summary>
     /// <param name="ncid">File and group ID</param>
-    /// <param name="varid">Dimension ID</param>
+    /// <param name="dimid">Dimension ID</param>
     /// <param name="lenp">Pointer to where the length will be stored.</param>
     /// <returns>
     /// - NC_NOERR No error.

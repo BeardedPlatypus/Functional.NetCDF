@@ -1,7 +1,7 @@
 ﻿namespace BeardedPlatypus.Functional.NetCDF
 
 /// <summary>
-/// <see cref="AttributeValue"> implements <see cref="IAttributeValue"/> interface.
+/// <see cref="AttributeValue"/> implements <see cref="IAttributeValue"/> interface.
 /// </summary>
 [<Sealed>]
 type internal AttributeValue<'T> (values: 'T[]) =

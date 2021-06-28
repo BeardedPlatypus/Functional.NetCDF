@@ -1,7 +1,7 @@
 ﻿namespace BeardedPlatypus.Functional.NetCDF
 
 /// <summary>
-/// <see cref="VariableValue"> implements <see cref="IVariableValue"/> interface.
+/// <see cref="VariableValue"/> implements <see cref="IVariableValue"/> interface.
 /// </summary>
 [<Sealed>]
 type internal VariableValue<'T> (values: 'T[], shape: int[]) =
