@@ -6,7 +6,7 @@
     "changelogUrl": "https://github.com/BeardedPlatypus/Functional.NetCDF/blob/main/CHANGELOG.md",
     "licensesUrl": "https://github.com/BeardedPlatypus/Functional.NetCDF/blob/main/LICENSE.md",
     "dependencies": {
-        "com.beardedplatypus.fsharp.core": "5.0.1"
+        "com.beardedplatypus.fsharp.core": "5.0.2"
      },
     "author": {
       "name": "Maarten Tegelaers",
