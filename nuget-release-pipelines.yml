@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - refs/tags/release_*
+      - refs/tags/v*
 
 pool:
   vmImage: windows-latest
