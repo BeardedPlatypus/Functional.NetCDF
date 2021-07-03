@@ -82,9 +82,15 @@ type internal Repository (file: Managed.IFile) =
         file.RetrieveNVariables () 
         |> Result.map (fun (size: int) -> seq { for i in 0 .. (size - 1) do yield VariableID(Managed.Common.VarID i) })
         |> Result.map (Seq.filter filter)
-        
+
+    let retrieveVariableName (varID: VariableID) : Result<string, Native.NetCDF.NCReturnCode> =
+        file.RetrieveVariableName varID.ID
 
     interface IRepository with
+        member this.RetrieveVariableName (id: VariableID): string =
+            retrieveVariableName id
+            |> resolveResult
+
         member this.RetrieveVariableValue (id: VariableID) : IVariableValue<'T> =
             retrieveVariableValue id |> resolveResult
  

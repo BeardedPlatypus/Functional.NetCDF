@@ -7,6 +7,18 @@
 [<Interface>]
 type public IRepository = 
     /// <summary>
+    /// Retrieve the name of the variable associated with the variable <paramref name="id"/>.
+    /// </summary>
+    /// <param name="id">The id of the variable.</param>
+    /// <returns>
+    /// The name of the variable associated with <paramref name="id"/>.
+    /// </returns>
+    /// <exception cref="Exceptions.NetCDFException"> 
+    /// Thrown when any exception occurs during retrieving the variable values.
+    /// </exception>
+    abstract member RetrieveVariableName : id: VariableID -> string
+
+    /// <summary>
     /// Retrieve the variable values associated with the variable id, <paramref name="id"/>
     /// </summary>
     /// <param name="id">The id of the variable.</param>
