@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1]
+
+- Added `RetrieveVariableName` method to `IRepository` to retrieve the name  
+  associated with a `VariableID`
+
 ## [0.1.0]
 
 - Added initial reading of NetCDF variables and their attributes from NetCDF files
