@@ -74,14 +74,15 @@ type internal Repository (file: Managed.IFile) =
     let retrieveAttribute (attributeName: string) (id: VariableID) : Result<IAttributeValue<'T>, Native.NetCDF.NCReturnCode> =
         let size = file.RetrieveAttributeInformation id.ID attributeName
                    |> Result.map (fun info -> info.Size)
+
         let values = size |> Result.bind (fun (s: int) -> Managed.Attribute.Value<'T>.Retrieve file id.ID attributeName s )
 
         values |> Result.map (fun values -> AttributeValue(values) :> IAttributeValue<'T>)
 
-    let retrieveVariables (filter: VariableID -> bool): Result<seq<VariableID>, Native.NetCDF.NCReturnCode> =
+    let retrieveVariables (filter: VariableID -> bool): Result<VariableID list, Native.NetCDF.NCReturnCode> =
         file.RetrieveNVariables () 
-        |> Result.map (fun (size: int) -> seq { for i in 0 .. (size - 1) do yield VariableID(Managed.Common.VarID i) })
-        |> Result.map (Seq.filter filter)
+        |> Result.map (fun (size: int) -> [ for i in 0 .. (size - 1) do yield VariableID(Managed.Common.VarID i) ])
+        |> Result.map (List.filter filter)
 
     let retrieveVariableName (varID: VariableID) : Result<string, Native.NetCDF.NCReturnCode> =
         file.RetrieveVariableName varID.ID
@@ -90,6 +91,9 @@ type internal Repository (file: Managed.IFile) =
         member this.RetrieveVariableName (id: VariableID): string =
             retrieveVariableName id
             |> resolveResult
+
+        member this.RetrieveVariableID (name: string): VariableID=
+            retrieveVariableID name
 
         member this.RetrieveVariableValue (id: VariableID) : IVariableValue<'T> =
             retrieveVariableValue id |> resolveResult
@@ -112,6 +116,7 @@ type internal Repository (file: Managed.IFile) =
             let filter (id: VariableID) = (retrieveAttribute attributeName id) |> isOk
             retrieveVariables filter
             |> resolveResult
+            |> Seq.ofList
 
         member this.RetrieveVariablesWithAttributeWithValue<'T when 'T : equality> (attributeName: string, attributeValue: 'T) : seq<VariableID> =
             let filter (id: VariableID) = 
@@ -122,4 +127,5 @@ type internal Repository (file: Managed.IFile) =
 
             retrieveVariables filter
             |> resolveResult
+            |> Seq.ofList
 
