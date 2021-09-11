@@ -60,7 +60,14 @@ module internal Attribute =
 
         interface IRetriever<string> with 
             member this.Retrieve (file: IFile) (varID: Common.VarID) (attributeName: string) (valueSize: int) : Result<string[], NCReturnCode> =
-                (file.RetrieveAttributeValueText varID attributeName (valueSize - 1)) |> (Result.map Array.singleton)
+                // There seems to be an inconsistency between .NET5 and Unity, where an additional character is read for .NET5 but not Unity
+                // Currently this is fixed with this compiler directive.
+                #if NETCDF_TRIM_STRINGS
+                let size = valueSize - 1
+                #else 
+                let size = valueSize
+                #endif
+                (file.RetrieveAttributeValueText varID attributeName size) |> (Result.map Array.singleton)
 
         interface IRetriever<uint32> with 
             member this.Retrieve (file: IFile) (varID: Common.VarID) (attributeName: string) (valueSize: int) : Result<uint32[], NCReturnCode> =
