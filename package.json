@@ -1,6 +1,6 @@
 {
   "name": "com.beardedplatypus.functional.netcdf",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "displayName": "Functional.NetCDF",
   "description": "An opinionated NetCDF4 wrapper for .NET on windows.",
   "changelogUrl": "https://github.com/BeardedPlatypus/Functional.NetCDF/blob/main/CHANGELOG.md",
