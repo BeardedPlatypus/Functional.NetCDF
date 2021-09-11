@@ -7,32 +7,38 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Functional.NetCDF", "Functi
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Functional.NetCDF.Tests", "Functional.NetCDF.Tests\Functional.NetCDF.Tests.fsproj", "{130AA3DB-06CD-41C1-8629-34DA6609489B}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Functional.NetCDF.Samples.FSharp", "Functional.NetCDF.Samples.FSharp\Functional.NetCDF.Samples.FSharp.fsproj", "{1D66D6D1-4EB7-4460-96BF-E85A3782495E}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Functional.NetCDF.Samples.FSharp", "Functional.NetCDF.Samples.FSharp\Functional.NetCDF.Samples.FSharp.fsproj", "{1D66D6D1-4EB7-4460-96BF-E85A3782495E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functional.NetCDF.Samples.CSharp", "Functional.NetCDF.Samples.CSharp\Functional.NetCDF.Samples.CSharp.csproj", "{11EC0FD1-1B9D-4737-AF6B-F16F820EBCBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Functional.NetCDF.Samples.CSharp", "Functional.NetCDF.Samples.CSharp\Functional.NetCDF.Samples.CSharp.csproj", "{11EC0FD1-1B9D-4737-AF6B-F16F820EBCBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		UPM|Any CPU = UPM|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{BD542F07-1F16-4B21-9DA7-7224089C6FDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BD542F07-1F16-4B21-9DA7-7224089C6FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD542F07-1F16-4B21-9DA7-7224089C6FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD542F07-1F16-4B21-9DA7-7224089C6FDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD542F07-1F16-4B21-9DA7-7224089C6FDE}.UPM|Any CPU.ActiveCfg = UPM|Any CPU
+		{BD542F07-1F16-4B21-9DA7-7224089C6FDE}.UPM|Any CPU.Build.0 = UPM|Any CPU
 		{130AA3DB-06CD-41C1-8629-34DA6609489B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{130AA3DB-06CD-41C1-8629-34DA6609489B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{130AA3DB-06CD-41C1-8629-34DA6609489B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{130AA3DB-06CD-41C1-8629-34DA6609489B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{130AA3DB-06CD-41C1-8629-34DA6609489B}.UPM|Any CPU.ActiveCfg = UPM|Any CPU
 		{1D66D6D1-4EB7-4460-96BF-E85A3782495E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1D66D6D1-4EB7-4460-96BF-E85A3782495E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D66D6D1-4EB7-4460-96BF-E85A3782495E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D66D6D1-4EB7-4460-96BF-E85A3782495E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D66D6D1-4EB7-4460-96BF-E85A3782495E}.UPM|Any CPU.ActiveCfg = UPM|Any CPU
 		{11EC0FD1-1B9D-4737-AF6B-F16F820EBCBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11EC0FD1-1B9D-4737-AF6B-F16F820EBCBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11EC0FD1-1B9D-4737-AF6B-F16F820EBCBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11EC0FD1-1B9D-4737-AF6B-F16F820EBCBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11EC0FD1-1B9D-4737-AF6B-F16F820EBCBD}.UPM|Any CPU.ActiveCfg = UPM|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

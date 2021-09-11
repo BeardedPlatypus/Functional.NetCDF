@@ -6,6 +6,7 @@
     <IsPackable>false</IsPackable>
     <GenerateProgramFile>false</GenerateProgramFile>
     <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+    <Configurations>Debug;Release;UPM</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
