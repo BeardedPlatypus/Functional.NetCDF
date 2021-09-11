@@ -154,3 +154,20 @@ type Repository_Test () =
         // Assert
         result |> should equal expectedVariableName
         
+    [<Test>]
+    [<TestCase("projected_coordinate_system", 0)>]
+    [<TestCase("mesh2d", 1)>]
+    [<TestCase("mesh2d_node_x", 2)>]
+    [<TestCase("mesh2d_node_y", 3)>]
+    [<TestCase("mesh2d_node_z", 4)>]
+    member this.``RetrieveVariableID returns the correct variable id.`` (name: string, variableID: int) =
+        // Setup
+        use file: Managed.IFile = Managed.NetCDF.OpenExisting "./test-data/map.nc"
+        let repo : IRepository = Repository(file) :> IRepository
+
+        // Call
+        let result = repo.RetrieveVariableID name
+
+        // Assert
+        let expectedVariableID = VariableID (Common.VarID variableID)
+        result |> should equal expectedVariableID
