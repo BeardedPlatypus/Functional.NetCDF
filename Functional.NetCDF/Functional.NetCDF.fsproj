@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <Company />
     <Authors>Maarten Tegelaers</Authors>
     <RepositoryType>git</RepositoryType>
