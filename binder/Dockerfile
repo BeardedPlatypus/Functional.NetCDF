@@ -55,6 +55,7 @@ RUN dotnet_sdk_version=6.0.100 \
 # Copy notebooks
 
 COPY ./binder/notebooks/ ${HOME}/notebooks/
+COPY ./Functional.NetCDF.Tests/test-data/map.nc ${HOME}/notebooks/example-data/map.nc
 
 # Add package sources
 RUN echo "\
