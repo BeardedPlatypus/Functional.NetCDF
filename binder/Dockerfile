@@ -99,41 +99,9 @@ RUN dotnet interactive jupyter install
 # Enable telemetry once we install jupyter for the image
 ENV DOTNET_INTERACTIVE_CLI_TELEMETRY_OPTOUT=false
 
-# Install NetCDF4:
-# - wget
-RUN apt-get update
-RUN apt-get install -y wget
+# Install NETCDF4
 
-# - zlib
-WORKDIR ${HOME}
-ARG ZLIB_VERSION=1.2.8
-RUN wget "ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4/zlib-${ZLIB_VERSION}.tar.gz"
-RUN tar -xf zlib-${ZLIB_VERSION}.tar.gz
-WORKDIR ${HOME}/zlib-${ZLIB_VERSION}
-RUN /configure --prefix=/usr/local
-RUN make install
-
-# - HDF5
-WORKDIR ${HOME}
-ARG HDF5_VERSION=1.8.13
-RUN wget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4/hdf5-${HDF5_VERSION}.tar.gz
-RUN tar -xf hdf5-${HDF5_VERSION}.tar.gz
-ENV HDF5_DIR ${HOME}/hdf5-${HDF5_VERSION}
-WORKDIR ${HDF5_DIR}
-RUN ./configure --enable-shared --enable-hl --prefix=$HDF5_DIR
-RUN make -j 2 
-RUN make install
-
-# - NETCDF4
-WORKDIR ${HOME}
-ARG NETCDF4_VERSION=4.1.3
-RUN wget http://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-${NETCDF4_VERSION}.tar.gz
-RUN tar -xf netcdf-${NETCDF4_VERSION}.tar.gz
-ENV NETCDF4_DIR ${HOME}
-WORKDIR ${HOME}/netcdf-${NETCDF4_VERSION}
-RUN CPPFLAGS=-I$HDF5_DIR/include LDFLAGS=-L$HDF5_DIR/lib ./configure --enable-netcdf-4 --enable-shared --enable-dap --prefix=$NETCDF4_DIR
-RUN make
-RUN make install
+RUN pip install --no-cache-dir NETCDF4
 
 # Set root to notebooks
 WORKDIR ${HOME}/notebooks/
